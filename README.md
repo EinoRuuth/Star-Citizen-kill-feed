@@ -23,13 +23,6 @@
 
 This project is just for fun, so this might be abandoned randomly at some point
 
-## Table of Contents
-- [About](#-about)
-- [Documentation](#-documentation)
-- [Feedback and Contributions](#-feedback-and-contributions)
-- [License](#-license)
-- [Contacts](#-contacts)
-
 ##  About
 
 **Star citizen kill feed** is a java program that parses trought the game.log file and lists all player and ship deaths in a readable format
