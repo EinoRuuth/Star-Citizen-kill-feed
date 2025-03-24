@@ -28,7 +28,7 @@ This project is just for fun, so this might be abandoned randomly at some point
 - [Documentation](#-documentation)
 - [Feedback and Contributions](#-feedback-and-contributions)
 - [License](#-license)
-- [Contacts](#%EF%B8%8F-contacts)
+- [Contacts](#-contacts)
 
 ##  About
 
