@@ -30,7 +30,7 @@ This project is just for fun, so this might be abandoned randomly at some point
 - [License](#-license)
 - [Contacts](#%EF%B8%8F-contacts)
 
-## 🚀 About
+##  About
 
 **Star citizen kill feed** is a java program that parses trought the game.log file and lists all player and ship deaths in a readable format
 
@@ -52,8 +52,7 @@ Install a jar file from [releases](https://github.com/EinoRuuth/Star-Citizen-kil
 If no data is shown and you have data in your game.log file. click the "file" button and choose the game.log file
 
 
-
-## 🤝 Feedback and Contributions
+##  Feedback and Contributions
 
 > [!IMPORTANT]
 > Whether you have feedback on features, have encountered any bugs, or have suggestions for enhancements, reach out to me with feedback. 
@@ -61,20 +60,10 @@ If no data is shown and you have data in your game.log file. click the "file" bu
 Please feel free to contribute by [submitting an issue](https://github.com/EinoRuuth/Star-Citizen-kill-feed/issues).
 
 
-
-## 📃 License
-
-This product is distributed under a proprietary license.
-
-For non-commercial use, this product is available for free.
-
 ## 🗨️ Contacts
 
 For questions and other stuff, feel free to reach out to my Email.
 
 - **Email**: Send us your inquiries or support requests at [eino@ruuth.net](mailto:eino@ruuth.net).
-
-
-We look forward to assisting you and ensuring your experience with our products is successful and enjoyable!
 
 [Back to top](#top)
