@@ -14,7 +14,7 @@
 [![GitHub last commit](https://img.shields.io/github/last-commit/EinoRuuth/Star-Citizen-kill-feed)](#)
 [![Free](https://img.shields.io/badge/free_for_non_commercial_use-brightgreen)](#-license)
 
-⭐ Star me on GitHub — it motivates me a lot!
+⭐ Star me on GitHub
 
 
 
