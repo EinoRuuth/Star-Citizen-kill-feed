@@ -1,6 +1,7 @@
 package view;
 
 import java.io.IOException;
+import java.util.List;
 
 import controller.KFController;
 import javafx.application.Application;
@@ -17,7 +18,7 @@ public class GUI extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         System.out.println("Loading FXML file...");
-        scene = new Scene(getLoader("SCglParser_v1", stage), 410, 405);
+        scene = new Scene(getLoader("SCglParser_v1_responsive", stage), 670, 405);
         System.out.println("FXML file loaded successfully.");
         stage.setTitle("SC Kill feed");
         stage.setScene(scene);
@@ -48,8 +49,11 @@ public class GUI extends Application {
         stage.centerOnScreen();
     }
 
-    public void refresh(){
-        System.out.println("GUi refreshed");
-        controller.refresh();
+    public void addKill(List<String> kill){
+        controller.addKill(kill);
+    }
+
+    public void addDestruction(List<String> destruction){
+        controller.addDestruction(destruction);
     }
 }

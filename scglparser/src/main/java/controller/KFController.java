@@ -4,8 +4,6 @@ import java.io.File;
 import java.util.List;
 import view.GUI;
 import util.FileController;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
@@ -24,9 +22,12 @@ public class KFController {
     private Stage stage;
     private FileController fileController;
 
-    public void refresh(){
-        System.out.println("controller refreshed");
-        fillListView();
+    public void addKill(List<String> kill){
+        PlayerKills.getChildren().add(0, createTextFlowWithBoldText(kill));
+    }
+
+    public void addDestruction(List<String> destruction){
+        ShipKills.getChildren().add(0, createTextFlowWithBoldText(destruction));
     }
 
     public void setGUI(GUI gui){
@@ -42,45 +43,45 @@ public class KFController {
 
         PlayerKills.getChildren().clear();
         gameLogParser.getPlayerKills().forEach(kill -> {
-            PlayerKills.getChildren().add(createTextFlowWithBoldText(kill));
+            PlayerKills.getChildren().add(0, createTextFlowWithBoldText(kill));
         });
 
         ShipKills.getChildren().clear();
-        gameLogParser.getShipKills().forEach(kill -> {
-            ShipKills.getChildren().add(createTextFlowWithBoldText(kill));
+        gameLogParser.getShipKills().forEach(destruction -> {
+            ShipKills.getChildren().add(0, createTextFlowWithBoldText(destruction));
         });
 
         System.out.println("list view filled");
-    }
+        }
 
-    private TextFlow createTextFlowWithBoldText(List<String> input) {
+        private TextFlow createTextFlowWithBoldText(List<String> input) {
         TextFlow textFlow = new TextFlow();
-
         int loopTime = 0;
 
         for (String s : input) {
             if (loopTime == 0) {
-                Text text = new Text(s);
-                text.setStyle("-fx-font-weight: Bold");
-                textFlow.getChildren().add(text);
+            Text text = new Text(s);
+            text.setStyle("-fx-font-weight: Bold");
+            textFlow.getChildren().add(text);
             }
             else if (loopTime % 2 == 0) {
-                Text text = new Text(s);
-                text.setStyle("-fx-font-weight: Bold");
-                textFlow.getChildren().add(text);
+            Text text = new Text(s);
+            text.setStyle("-fx-font-weight: Bold");
+            textFlow.getChildren().add(text);
             }
             else {
-                Text text = new Text(s);
-                text.setStyle("-fx-font-weight: regular");
-                textFlow.getChildren().add(text);
+            Text text = new Text(s);
+            text.setStyle("-fx-font-weight: regular");
+            textFlow.getChildren().add(text);
             }
             loopTime++;
         }
-        return textFlow;
-    }
 
-    @FXML
-    private void handleFileChooser(){
+        return textFlow;
+        }
+
+        @FXML
+        private void handleFileChooser(){
         System.out.println("Opened file selector");
         FileChooser fileChooser = new FileChooser();
         File file = fileChooser.showOpenDialog(stage);

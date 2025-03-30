@@ -50,12 +50,14 @@ public class GameLogParser {
                 if (line != null) {
                     if (line.contains("kill")) {
                         System.out.println("New kill");
-                        kills.add(listifyKill(line));
-                        Platform.runLater(() -> this.gui.refresh());
+                        List<String> listified = listifyKill(line);
+                        kills.add(listified);
+                        Platform.runLater(() -> this.gui.addKill(listified));
                     } else if (line.contains("Destruction")) {
                         System.out.println("New destruction");
-                        destroys.add(listifyDestuction(line));
-                        Platform.runLater(() -> this.gui.refresh());
+                        List<String> listified = listifyDestuction(line);
+                        destroys.add(listified);
+                        Platform.runLater(() -> this.gui.addDestruction(listified));
                     }
                 } else {
                     Thread.sleep(1000);
@@ -82,8 +84,11 @@ public class GameLogParser {
             parts[x] = parts[x].replaceAll("'", "");
         }
         String location = parts[9];
-        location = location.substring(0, location.lastIndexOf('_'));
-        location = location.replaceAll("_", " ");
+        if (location.contains("_")){
+            location = location.substring(0, location.lastIndexOf('_'));
+            location = location.replaceAll("_", " ");
+        }
+
         return Arrays.asList(parts[5], " died in ", location, " killed by ", parts[12]);
     }
 
@@ -106,7 +111,12 @@ public class GameLogParser {
         String ship = parts[6];
         ship = ship.substring(0, ship.lastIndexOf('_'));
         ship = ship.replaceAll("_", " ");
-        return Arrays.asList(ship, " got destroyed in ", parts[10], " destroyed by ", cleanKiller(parts[38]), " piloted by ", parts[27], " with a ", parts[41]);
+        String location = parts[10];
+        if (location.contains("_")){
+            location = location.substring(0, location.lastIndexOf('_'));
+            location = location.replaceAll("_", " ");
+        }
+        return Arrays.asList(ship, " got destroyed in ", location, " destroyed by ", cleanKiller(parts[38]), " piloted by ", parts[27], " with a ", parts[41]);
     }
 
     private String prettyfiDestuction(String line) {

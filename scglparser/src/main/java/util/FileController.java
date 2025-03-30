@@ -25,6 +25,7 @@ public class FileController {
     }
 
     public String getFileLocation() {
+        System.out.println("fetched file location");
         return properties.getProperty("fileLocation");
     }
 
