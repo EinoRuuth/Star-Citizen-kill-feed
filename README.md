@@ -27,7 +27,7 @@ This project is just for fun, so this might be abandoned randomly at some point
 
 **Star citizen kill feed** is a java program that parses trought the game.log file and lists all player and ship deaths in a readable format
 
-- ** Real time updating**: The lists update in real time when a kill happends ingame. 
+- **Real time updating**: The lists update in real time when a kill happends ingame. 
 - **JavaFX client**: Multiplatform compatibility with a responsive UI.  
 
 
