@@ -8,6 +8,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 
@@ -22,6 +23,7 @@ public class GUI extends Application {
         System.out.println("FXML file loaded successfully.");
         stage.setTitle("SC Kill feed");
         stage.setScene(scene);
+        stage.getIcons().add(new Image(GUI.class.getResourceAsStream("/logo.png")));
         stage.show();
     }
 

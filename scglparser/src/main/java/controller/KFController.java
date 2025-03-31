@@ -10,6 +10,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.FileChooser;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import util.GameLogParser;
 
@@ -61,17 +62,17 @@ public class KFController {
         for (String s : input) {
             if (loopTime == 0) {
             Text text = new Text(s);
-            text.setStyle("-fx-font-weight: Bold");
+            text.setStyle("-fx-font-weight: Bold; -fx-fill: white;");
             textFlow.getChildren().add(text);
             }
             else if (loopTime % 2 == 0) {
             Text text = new Text(s);
-            text.setStyle("-fx-font-weight: Bold");
+            text.setStyle("-fx-font-weight: Bold; -fx-fill: white;");
             textFlow.getChildren().add(text);
             }
             else {
             Text text = new Text(s);
-            text.setStyle("-fx-font-weight: regular");
+            text.setStyle("-fx-font-weight: regular; -fx-fill: lightgrey;");
             textFlow.getChildren().add(text);
             }
             loopTime++;

@@ -10,6 +10,7 @@
 <AnchorPane xmlns="http://javafx.com/javafx/23.0.1" 
             xmlns:fx="http://javafx.com/fxml/1" 
             fx:controller="controller.KFController"
+            stylesheets="style.css"
             prefHeight="Infinity" 
             prefWidth="Infinity">
 
@@ -17,29 +18,32 @@
         <VBox spacing="10.0" AnchorPane.topAnchor="5.0" AnchorPane.leftAnchor="5.0" 
               AnchorPane.rightAnchor="5.0" AnchorPane.bottomAnchor="5.0">
             <Label text="Player kills" alignment="CENTER" textAlignment="CENTER" 
+                styleClass="section-title"
                    mouseTransparent="true">
                 <font>
                     <Font size="18.0" />
                 </font>
             </Label>
-            <ScrollPane fitToWidth="true">
+            <ScrollPane fitToWidth="true" styleClass="kill-list">
                 <content>
-                    <VBox fx:id="PlayerKills"/>
+                    <VBox fx:id="PlayerKills" styleClass="kill-list" minHeight="32.0" />
                 </content>
             </ScrollPane>
             <Label text="Ship kills" alignment="CENTER" textAlignment="CENTER" 
+                styleClass="section-title"
                    mouseTransparent="true">
                 <font>
                     <Font size="18.0" />
                 </font>
             </Label>
-            <ScrollPane fitToWidth="true">
+            <ScrollPane fitToWidth="true" styleClass="kill-list">
                 <content>
-                    <VBox fx:id="ShipKills"/>
+                    <VBox fx:id="ShipKills" styleClass="kill-list" minHeight="32.0" />
                 </content>
             </ScrollPane>
         </VBox>
         <Button fx:id="fileButton" text="File" mnemonicParsing="false" 
+                styleClass="rsi-button"
                 onAction="#handleFileChooser"
                 AnchorPane.topAnchor="5.0"
                 AnchorPane.rightAnchor="5.0"/>
