@@ -50,7 +50,7 @@ If no data is shown and you have data in your game.log file. click the "file" bu
 The styling of the UI currently is this,  
 any suggestions to styling/overall look is appreciated
 
-<img height="300" src="https://github.com/EinoRuuth/Star-Citizen-kill-feed/blob/main/Images/Screenshot_192.png?raw=true">
+<img height="300" src="https://github.com/EinoRuuth/Star-Citizen-kill-feed/blob/main/Images/UI_31.3.25.png?raw=true">
 
 ##  Feedback and Contributions
 
