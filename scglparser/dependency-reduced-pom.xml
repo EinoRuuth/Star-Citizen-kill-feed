@@ -7,7 +7,7 @@
   <version>1.0</version>
   <url>http://www.example.com</url>
   <build>
-    <finalName>sc_kill_feed_v1.5.2</finalName>
+    <finalName>sc_kill_feed_v2</finalName>
     <plugins>
       <plugin>
         <artifactId>maven-shade-plugin</artifactId>
@@ -19,7 +19,7 @@
               <goal>shade</goal>
             </goals>
             <configuration>
-              <finalName>sc_kill_feed_v1.5.2</finalName>
+              <finalName>sc_kill_feed_v2</finalName>
               <transformers>
                 <transformer>
                   <mainClass>Main</mainClass>

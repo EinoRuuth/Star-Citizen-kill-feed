@@ -79,7 +79,7 @@
     </dependencies>
 
     <build>
-        <finalName>sc_kill_feed_v1.5.2</finalName>
+        <finalName>sc_kill_feed_v2</finalName>
         <plugins>
             <!-- making an executable javafx application -->
             <plugin>
@@ -93,7 +93,7 @@
                             <goal>shade</goal>
                         </goals>
                         <configuration>
-                            <finalName>sc_kill_feed_v1.5.2</finalName>
+                            <finalName>sc_kill_feed_v2</finalName>
                             <transformers>
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
                                     <mainClass>Main</mainClass>

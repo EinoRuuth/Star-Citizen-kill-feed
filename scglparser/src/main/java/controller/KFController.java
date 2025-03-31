@@ -5,20 +5,21 @@ import java.util.List;
 import view.GUI;
 import util.FileController;
 import javafx.fxml.FXML;
+import javafx.geometry.Side;
 import javafx.scene.control.Button;
+import javafx.scene.control.TabPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.FileChooser;
-import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import util.GameLogParser;
 
 public class KFController {
     private GameLogParser gameLogParser;
-    @FXML VBox PlayerKills;
-    @FXML VBox ShipKills;
+    @FXML VBox PlayerKills, ShipKills; // this way to add multiple of same in cleaner way
     @FXML Button fileButton;
+    @FXML TabPane MainTabPane;
     private GUI gui;
     private Stage stage;
     private FileController fileController;
@@ -95,6 +96,11 @@ public class KFController {
 
     public void start() {
         System.out.println("started");
+        MainTabPane.setTabMaxWidth(40);
+        MainTabPane.setTabMinWidth(40);
+        MainTabPane.setTabMaxHeight(40);
+        MainTabPane.setTabMinHeight(40);
+        MainTabPane.setSide(Side.LEFT);
         fileController = new FileController();
         gameLogParser = new GameLogParser(fileController.getFileLocation(), gui);
         System.out.println("Parser initialized");

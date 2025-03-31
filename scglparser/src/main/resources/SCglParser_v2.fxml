@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+
+<TabPane    fx:id="MainTabPane" 
+            maxHeight="-Infinity" 
+            maxWidth="-Infinity" 
+            minHeight="-Infinity" 
+            minWidth="-Infinity" 
+            prefHeight="Infinity" 
+            prefWidth="Infinity" 
+            tabClosingPolicy="UNAVAILABLE" 
+            xmlns:fx="http://javafx.com/fxml/1" 
+            xmlns="http://javafx.com/javafx/23.0.1" 
+            fx:controller="controller.KFController" 
+            stylesheets="@style.css">
+  <tabs>
+    <Tab text="☰">
+      <content>
+        <AnchorPane
+            prefHeight="Infinity" prefWidth="Infinity">
+            <children>
+                <VBox spacing="10.0" AnchorPane.topAnchor="5.0" AnchorPane.leftAnchor="5.0" 
+                    AnchorPane.rightAnchor="5.0" AnchorPane.bottomAnchor="5.0">
+                    <Label text="Player kills" alignment="CENTER" textAlignment="CENTER" 
+                        styleClass="section-title"
+                        mouseTransparent="true">
+                        <font>
+                            <Font size="18.0" />
+                        </font>
+                    </Label>
+                    <ScrollPane fitToWidth="true" styleClass="kill-list">
+                        <content>
+                            <VBox fx:id="PlayerKills" styleClass="kill-list" minHeight="32.0" />
+                        </content>
+                    </ScrollPane>
+                    <Label text="Ship kills" alignment="CENTER" textAlignment="CENTER" 
+                        styleClass="section-title"
+                        mouseTransparent="true">
+                        <font>
+                            <Font size="18.0" />
+                        </font>
+                    </Label>
+                    <ScrollPane fitToWidth="true" styleClass="kill-list">
+                        <content>
+                            <VBox fx:id="ShipKills" styleClass="kill-list" minHeight="32.0" />
+                        </content>
+                    </ScrollPane>
+                </VBox>
+            </children>
+        </AnchorPane>
+      </content>
+    </Tab>
+    <Tab text="👥">
+      <content>
+        <AnchorPane prefHeight="Infinity" prefWidth="Infinity" >
+            <children>
+                <VBox spacing="10.0" AnchorPane.topAnchor="5.0" AnchorPane.leftAnchor="5.0" 
+                    AnchorPane.rightAnchor="5.0" AnchorPane.bottomAnchor="5.0" styleClass="add-padding">
+                    <Label text="Party" alignment="CENTER" textAlignment="CENTER" 
+                        styleClass="section-title-big"
+                        mouseTransparent="true">
+                    </Label>
+                    <Label text="Add party members here so alarm wont trigger on their kills" alignment="CENTER"
+                        styleClass="section-title"
+                        mouseTransparent="true">
+                    </Label>
+                </VBox>
+            </children>
+        </AnchorPane>
+      </content>
+    </Tab>
+    <Tab text="⛭">
+      <content>
+        <AnchorPane prefHeight="Infinity" prefWidth="Infinity" >
+            <children>
+                <VBox styleClass="add-padding">
+                    <Label text="Settings" alignment="CENTER" textAlignment="CENTER" 
+                        styleClass="section-title-big"
+                        mouseTransparent="true">
+                    </Label>
+                    <HBox spacing="50.0" AnchorPane.topAnchor="5.0" AnchorPane.leftAnchor="5.0" 
+                            AnchorPane.bottomAnchor="5.0">
+                        <VBox spacing="10.0" HBox.hgrow="ALWAYS">
+                            <Label text="File location" alignment="CENTER" textAlignment="CENTER" 
+                                styleClass="section-title"
+                                mouseTransparent="true">
+                            </Label>
+                            <Label text="Set game.log location" alignment="CENTER" textAlignment="CENTER" 
+                                styleClass="section-title-small"
+                                mouseTransparent="true">
+                            </Label>
+                            <Button fx:id="fileButton" text="Set File" mnemonicParsing="false" 
+                                styleClass="section-item-button"
+                                onAction="#handleFileChooser"
+                            />
+
+                            <!--Idk how to add a gap so i do this-->
+                            <Label text="" alignment="CENTER" textAlignment="CENTER" 
+                                styleClass="section-title"
+                                mouseTransparent="true">
+                            </Label>
+
+                            <Label text="Username" alignment="CENTER" textAlignment="CENTER" 
+                                styleClass="section-title"
+                                mouseTransparent="true">
+                            </Label>
+                            <Label maxWidth="200" wrapText="true" text="Add username to this so alarm never triggers on you" alignment="CENTER" textAlignment="LEFT" 
+                                styleClass="section-title-small"
+                                mouseTransparent="true">
+                            </Label>
+                            <TextField fx:id="usernameField" 
+                                styleClass="section-item-textfield" 
+                                promptText="Enter your username here"
+                            />
+                        </VBox>
+                        <VBox spacing="10.0" AnchorPane.topAnchor="5.0" AnchorPane.leftAnchor="5.0" 
+                            AnchorPane.rightAnchor="5.0" AnchorPane.bottomAnchor="5.0">
+                            <Label text="Alarm" alignment="CENTER" textAlignment="CENTER" 
+                                styleClass="section-title"
+                                mouseTransparent="true">
+                            </Label>
+                            <Label text="This toggles enemy nearby alarm" alignment="CENTER" textAlignment="CENTER" 
+                                styleClass="section-title-small"
+                                mouseTransparent="true">
+                            </Label>
+                            <!-- TODO add action -->
+                            <CheckBox fx:id="alarmToggle" text="Toggle alarm" mnemonicParsing="false" 
+                                styleClass="section-item-checkbox"
+                            />
+
+
+                            <Label text="Set alarm sound file (mp3?)" alignment="CENTER" textAlignment="CENTER" 
+                                styleClass="section-title-small"
+                                mouseTransparent="true">
+                            </Label>
+                            <!-- TODO add action -->
+                            <Button fx:id="fileButton" text="Set File" mnemonicParsing="false" 
+                                styleClass="section-item-button"
+                                onAction="#handleFileChooser"
+                            />
+                        </VBox>
+                    </HBox>
+                </VBox>
+            </children>
+        </AnchorPane>
+      </content>
+    </Tab>
+  </tabs>
+</TabPane>
