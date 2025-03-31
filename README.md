@@ -59,6 +59,6 @@ Please feel free to contribute by [submitting an issue](https://github.com/EinoR
 
 For questions and other stuff, feel free to reach out to my Email.
 
-- **Email**: Send us your inquiries or support requests at [eino@ruuth.net](mailto:eino@ruuth.net).
+- **Email**: Send me your questions or support requests at [eino@ruuth.net](mailto:eino@ruuth.net).
 
 [Back to top](#top)
