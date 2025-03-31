@@ -11,6 +11,8 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 
 <TabPane    fx:id="MainTabPane" 
             maxHeight="-Infinity" 
@@ -80,7 +82,14 @@
         </AnchorPane>
       </content>
     </Tab>
-    <Tab text="⛭">
+    <Tab>
+      <graphic>
+        <ImageView fitWidth="25.0" fitHeight="25.0">
+          <image>
+            <Image url="@settings.png" />
+          </image>
+        </ImageView>
+      </graphic>
       <content>
         <AnchorPane prefHeight="Infinity" prefWidth="Infinity" >
             <children>
