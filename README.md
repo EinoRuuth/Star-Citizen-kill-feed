@@ -46,6 +46,11 @@ Install a jar file from [releases](https://github.com/EinoRuuth/Star-Citizen-kil
 
 If no data is shown and you have data in your game.log file. click the "file" button and choose the game.log file
 
+### UI
+The styling of the UI currently is this,  
+any suggestions to styling/overall look is appreciated
+
+<img height="300" src="https://github.com/EinoRuuth/Star-Citizen-kill-feed/blob/main/Images/Screenshot_192.png?raw=true">
 
 ##  Feedback and Contributions
 
