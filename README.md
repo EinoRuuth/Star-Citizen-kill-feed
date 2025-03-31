@@ -33,6 +33,8 @@ This project is just for fun, so this might be abandoned randomly at some point
 
 New functionality incoming..
 - Better looking UI
+- alert when someone kills an npc
+- a way to add players from party so that theirs kills dont trigger an alarm
 
 
 ## 📚 Documentation 
