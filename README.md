@@ -1,10 +1,5 @@
 # Star citizen kill feed
 
-
-
-
-
-
 [![JDK21](https://img.shields.io/badge/JDK-21-512BD4)]()
 [![language](https://img.shields.io/badge/Java-%23ED8B00.svg?logo=openjdk&logoColor=white)]()
 [![OS](https://img.shields.io/badge/OS-Linux%2C%20Windows-0078D4)]()
@@ -16,12 +11,8 @@
 
 ⭐ Star me on GitHub
 
-
-
-
-## !!! NOTICE !!!
-
-This project is just for fun, so this might be abandoned randomly at some point
+> [!IMPORTANT]
+> This project is just for fun, so this might be abandoned randomly at some point
 
 ##  About
 
@@ -35,7 +26,6 @@ New functionality incoming..
 - Better looking UI
 - alert when someone kills an npc
 - a way to add players from party so that theirs kills dont trigger an alarm
-
 
 ## 📚 Documentation 
 
@@ -59,11 +49,8 @@ any suggestions to styling/overall look is appreciated
 
 Please feel free to contribute by [submitting an issue](https://github.com/EinoRuuth/Star-Citizen-kill-feed/issues).
 
-
 ## 🗨️ Contacts
 
 For questions and other stuff, feel free to reach out to my Email.
 
 - **Email**: Send me your questions or support requests at [eino@ruuth.net](mailto:eino@ruuth.net).
-
-[Back to top](#top)
