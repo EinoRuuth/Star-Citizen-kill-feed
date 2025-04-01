@@ -88,8 +88,7 @@ public class GameLogParser {
             location = location.substring(0, location.lastIndexOf('_'));
             location = location.replaceAll("_", " ");
         }
-
-        return Arrays.asList(parts[5], " died in ", location, " killed by ", parts[12]);
+        return Arrays.asList(parts[0], parts[5], " died in ", location, " killed by ", parts[12]);
     }
 
     private String prettyfiKill(String line) {
@@ -116,7 +115,7 @@ public class GameLogParser {
             location = location.substring(0, location.lastIndexOf('_'));
             location = location.replaceAll("_", " ");
         }
-        return Arrays.asList(ship, " got destroyed in ", location, " destroyed by ", cleanKiller(parts[38]), " piloted by ", parts[27], " with a ", parts[41]);
+        return Arrays.asList(parts[0], ship, " got destroyed in ", location, " destroyed by ", cleanKiller(parts[38]), " piloted by ", parts[27], " with a ", parts[41]);
     }
 
     private String prettyfiDestuction(String line) {

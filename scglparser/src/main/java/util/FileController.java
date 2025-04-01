@@ -1,44 +1,67 @@
 package util;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Properties;
+import java.util.prefs.Preferences;
 
 public class FileController {
-    private Properties properties = new Properties();
+    private Preferences preferences;
 
     public FileController() {
-        loadProperties();
+        preferences = Preferences.userNodeForPackage(FileController.class);
+        initializeDefaults();
     }
 
-    private void loadProperties() {
-        try (InputStream input = getClass().getClassLoader().getResourceAsStream("config.properties")) {
-            if (input == null) {
-                System.out.println("Sorry, unable to find config.properties");
-                return;
-            }
-            properties.load(input);
-        } catch (IOException ex) {
-            ex.printStackTrace();
+    private void initializeDefaults() {
+        if (preferences.get("SCLGfileLocation", null) == null) {
+            preferences.put("SCLGfileLocation", "C:/Program Files/Roberts Space Industries/StarCitizen/LIVE/game.log");
+        }
+        if (preferences.get("SCLGalarmSoundLocation", null) == null) {
+            preferences.put("SCLGalarmSoundLocation", "scglparser/src/main/resources/alarm.mp3");
+        }
+        if (preferences.get("SCLGvolume", null) == null) {
+            preferences.put("SCLGvolume", "0.15");
+        }
+        if (preferences.get("SCLGusername", null) == null) {
+            preferences.put("SCLGusername", "");
         }
     }
 
     public String getFileLocation() {
-        System.out.println("fetched file location");
-        return properties.getProperty("fileLocation");
+        System.out.println("Fetched file location");
+        return preferences.get("SCLGfileLocation", "defaultFileLocation");
     }
 
     public void setFileLocation(String newLocation) {
-        properties.setProperty("fileLocation", newLocation);
-        saveProperties();
+        preferences.put("SCLGfileLocation", newLocation);
+        System.out.println("File location updated to: " + newLocation);
     }
 
-    private void saveProperties() {
-        try (FileOutputStream output = new FileOutputStream(getClass().getClassLoader().getResource("config.properties").getFile())) {
-            properties.store(output, null);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
+    public String getAudioFileLocation() {
+        System.out.println("Fetched audio file location");
+        return preferences.get("SCLGalarmSoundLocation", "defaultAlarmSoundLocation");
+    }
+
+    public void setAudioFileLocation(String newLocation) {
+        preferences.put("SCLGalarmSoundLocation", newLocation);
+        System.out.println("Audio file location updated to: " + newLocation);
+    }
+
+    public String getVolume() {
+        System.out.println("Fetched volume");
+        return preferences.get("SCLGfvolume", "50");
+    }
+
+    public void setVolume(String newVolume) {
+        preferences.put("SCLGfvolume", newVolume);
+        System.out.println("Volume updated to: " + newVolume);
+    }
+
+    public String getUsername() {
+        System.out.println("Fetched username");
+        return preferences.get("SCLGusername", "");
+    }
+
+    public void setUsername(String newUsername) {
+        preferences.put("SCLGusername", newUsername);
+        System.out.println("Username updated to: " + newUsername);
     }
 }

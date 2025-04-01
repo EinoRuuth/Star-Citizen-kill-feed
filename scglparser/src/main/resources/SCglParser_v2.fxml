@@ -13,6 +13,7 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.control.Slider?>
 
 <TabPane    fx:id="MainTabPane" 
             maxHeight="-Infinity" 
@@ -109,10 +110,23 @@
                                 styleClass="section-title-small"
                                 mouseTransparent="true">
                             </Label>
-                            <Button fx:id="fileButton" text="Set File" mnemonicParsing="false" 
-                                styleClass="section-item-button"
-                                onAction="#handleFileChooser"
-                            />
+                            <VBox styleClass="move-right">
+                                <HBox spacing="10">
+                                    <!-- TODO add action -->
+                                    <Button fx:id="fileButton" text="Set File" mnemonicParsing="false" 
+                                        styleClass="section-item-button"
+                                        onAction="#handleFileChooser"
+                                    />
+                                    <Label text="This is error msg" alignment="CENTER" textAlignment="CENTER" 
+                                        styleClass="error-text" fx:id="fileErrorMsg"
+                                        mouseTransparent="true">
+                                    </Label>
+                                </HBox>
+                                <Label text="File Location" alignment="CENTER" textAlignment="LEFT" 
+                                    styleClass="file-text" fx:id="fileLocations"
+                                    mouseTransparent="true" wrapText="true" maxWidth="200">
+                                </Label>
+                            </VBox>
 
                             <!--Idk how to add a gap so i do this-->
                             <Label text="" alignment="CENTER" textAlignment="CENTER" 
@@ -128,10 +142,17 @@
                                 styleClass="section-title-small"
                                 mouseTransparent="true">
                             </Label>
+                            <VBox>
                             <TextField fx:id="usernameField" 
                                 styleClass="section-item-textfield" 
                                 promptText="Enter your username here"
+                                onKeyReleased="#checkUsername"
                             />
+                            <Label text="✓ Saved" alignment="CENTER" textAlignment="CENTER" 
+                                mouseTransparent="true" styleClass="saved-text"
+                                fx:id="savedUsernameLabel">
+                            </Label>
+                            </VBox>
                         </VBox>
                         <VBox spacing="10.0" AnchorPane.topAnchor="5.0" AnchorPane.leftAnchor="5.0" 
                             AnchorPane.rightAnchor="5.0" AnchorPane.bottomAnchor="5.0">
@@ -148,15 +169,47 @@
                                 styleClass="section-item-checkbox"
                             />
 
+                            <!--Idk how to add a gap so i do this-->
+                            <Label text="" alignment="CENTER" textAlignment="CENTER" 
+                                mouseTransparent="true">
+                            </Label>
 
-                            <Label text="Set alarm sound file (mp3?)" alignment="CENTER" textAlignment="CENTER" 
+                            <Label text="Set alarm sound file (has to be mp3)" alignment="CENTER" textAlignment="CENTER" 
                                 styleClass="section-title-small"
                                 mouseTransparent="true">
                             </Label>
-                            <!-- TODO add action -->
-                            <Button fx:id="fileButton" text="Set File" mnemonicParsing="false" 
-                                styleClass="section-item-button"
-                                onAction="#handleFileChooser"
+                            <VBox styleClass="move-right">
+                                <HBox spacing="10">
+                                    <!-- TODO add action -->
+                                    <Button fx:id="fileButton" text="Set File" mnemonicParsing="false" 
+                                        styleClass="section-item-button"
+                                        onAction="#handleAudioFileChooser"
+                                    />
+                                    <Label text="This is error msg" alignment="CENTER" textAlignment="CENTER" 
+                                        styleClass="error-text" fx:id="audioFileErrorMsg"
+                                        mouseTransparent="true">
+                                    </Label>
+                                </HBox>
+                                <Label text="File Location" alignment="CENTER" textAlignment="LEFT" 
+                                    styleClass="file-text-audio" fx:id="audioFileLocations"
+                                    mouseTransparent="true" wrapText="true" maxWidth="200">
+                                </Label>
+                            </VBox>
+
+                            <!--Idk how to add a gap so i do this-->
+                            <Label text="" alignment="CENTER" textAlignment="CENTER" 
+                                mouseTransparent="true">
+                            </Label>
+
+                            <HBox spacing="10.0" alignment="CENTER">
+                                <Slider fx:id="volumeSlider" layoutX="196.0" layoutY="119.0" majorTickUnit="10.0" minorTickCount="5" 
+                                        onMouseReleased="#ChangeVolume" onMouseDragged="#updateVolumeText"
+                                        prefWidth="200.0" value="15.0" styleClass="section-item-slider" />
+                                <Label fx:id="volumeLabel" text="15" styleClass="slider-text" />
+                            </HBox>
+                            <Button fx:id="fileButton" text="test sound" mnemonicParsing="false" 
+                                styleClass="section-item-button-small"
+                                onAction="#playSound"
                             />
                         </VBox>
                     </HBox>
