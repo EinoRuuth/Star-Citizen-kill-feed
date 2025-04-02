@@ -139,6 +139,14 @@
     -fx-border-radius: 5;
 }
 
+.party-list {
+    -fx-background-color: #282C34;
+    -fx-text-fill: white;
+    -fx-border-color: #3A3F4B;
+    -fx-border-radius: 5;
+    -fx-padding: 2;
+}
+
 .rsi-button {
     -fx-background-color: linear-gradient(to bottom, #00aaff, #0077cc);
     -fx-text-fill: white;

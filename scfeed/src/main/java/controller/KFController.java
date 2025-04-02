@@ -4,6 +4,7 @@ import java.io.File;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.List;
 import javafx.animation.PauseTransition;
 import javafx.util.Duration;
@@ -11,12 +12,14 @@ import javafx.util.Duration;
 import view.GUI;
 import util.FileController;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.geometry.Side;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
@@ -24,23 +27,25 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.paint.Color;
 import util.GameLogParser;
 
 public class KFController {
     private GameLogParser gameLogParser;
-    @FXML VBox PlayerKills, ShipKills; // this way to add multiple of same in cleaner way
+    @FXML VBox PlayerKills, ShipKills, partyList;
     @FXML Button fileButton;
     @FXML TabPane MainTabPane;
     @FXML Slider volumeSlider;
-    @FXML TextField usernameField;
-    @FXML Label volumeLabel, audioFileErrorMsg, savedUsernameLabel, audioFileLocations, fileErrorMsg, fileLocations;
+    @FXML TextField usernameField, addToPartyField;
+    @FXML Label volumeLabel, audioFileErrorMsg, savedUsernameLabel, audioFileLocations, fileErrorMsg, fileLocations, addedToPartyLabel;
+    List<String> partyMembers = new ArrayList<String>();
     File audioFile;
     MediaPlayer player;
     private GUI gui;
     private Stage stage;
     private FileController fileController;
     private final PauseTransition pause = new PauseTransition(Duration.seconds(0.3));
-    private final PauseTransition showSaveDuration = new PauseTransition(Duration.seconds(3));
+    private final PauseTransition showSaveDuration = new PauseTransition(Duration.seconds(2));
 
     public void addKill(List<String> kill){
         PlayerKills.getChildren().add(0, createTextFlowWithBoldText(kill));
@@ -200,11 +205,62 @@ public class KFController {
         pause.play();
     }
 
+    @FXML
+    private void addToParty(){
+        addedToPartyLabel.setVisible(true);
+        partyMembers.add(addToPartyField.getText());
+        addToPartyField.clear();
+        fillSharedUsersList();
+        showSaveDuration.setOnFinished(event -> addedToPartyLabel.setVisible(false));
+        showSaveDuration.play();
+    }
+
+    private HBox makeTheBox(String name){
+        HBox hbox = new HBox();
+        hbox.setPrefHeight(25.0);
+        hbox.setPrefWidth(200.0);
+        hbox.setSpacing(3);
+
+        Label label = new Label(name);
+        label.setMaxHeight(26.0);
+        label.setMinHeight(26.0);
+        label.setPrefHeight(26.0);
+        label.setPrefWidth(300.0);
+        label.setStyle("-fx-border-color: grey; -fx-text-fill: white; -fx-border-radius: 5; -fx-background-color: #353a45;");
+        label.setPadding(new Insets(0, 0, 0, 10.0));
+
+        Button button = new Button("X");
+        button.setPrefWidth(27.0);
+        button.setPrefHeight(26.0);
+        button.setStyle("-fx-background-color: darkred;");
+        button.setTextFill(Color.WHITE);
+        button.setOnAction(e -> {
+            partyMembers.remove(name);
+            fillSharedUsersList();
+        });
+
+        hbox.getChildren().addAll(label, button);
+        return hbox;
+    }
+
+    private void fillSharedUsersList() {
+        partyList.getChildren().clear();
+        for (String i : partyMembers) {
+            HBox userBox = makeTheBox(i);
+            partyList.getChildren().add(userBox);
+        }
+    }
+
     public void start() {
         System.out.println("started");
+        partyMembers.add("Cpotato");
+        partyMembers.add("Coolestjonas");
+        partyMembers.add("Legeend");
+
         audioFileErrorMsg.setVisible(false);
         savedUsernameLabel.setVisible(false);
         fileErrorMsg.setVisible(false);
+        addedToPartyLabel.setVisible(false);
 
         MainTabPane.setTabMaxWidth(40);
         MainTabPane.setTabMinWidth(40);
@@ -219,6 +275,7 @@ public class KFController {
         fileLocations.setText("File: "+fileLocation);
         fillListView();
         getAlarmAudio();
+        fillSharedUsersList();
 
         usernameField.setText(fileController.getUsername());
     }

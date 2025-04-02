@@ -80,6 +80,32 @@
                         styleClass="section-title"
                         mouseTransparent="true">
                     </Label>
+                    <TextField fx:id="addToPartyField" 
+                        styleClass="section-item-textfield" 
+                        promptText="Enter party members username"
+                        maxWidth="200"
+                    />
+                    <VBox>
+                        <Button fx:id="fileButton" text="Add to party" mnemonicParsing="false" 
+                            styleClass="section-item-button"
+                            onAction="#addToParty"
+                        />
+                        <Label text="✓ Added to party" alignment="CENTER" textAlignment="CENTER" 
+                            mouseTransparent="true" styleClass="saved-text"
+                            fx:id="addedToPartyLabel">
+                        </Label>
+                    </VBox>
+                    <!--Idk how to add a gap so i do this-->
+                    <Label text="" alignment="CENTER" textAlignment="CENTER" 
+                        styleClass="section-title"
+                        mouseTransparent="true">
+                    </Label>
+                    <ScrollPane fitToWidth="true" styleClass="party-list" maxWidth="230">
+                        <content>
+                            <VBox spacing="5" fx:id="partyList" styleClass="kill-list" minHeight="32.0" maxWidth="230"
+                                maxHeight="Infinity" VBox.vgrow="ALWAYS"/>
+                        </content>
+                    </ScrollPane>
                 </VBox>
             </children>
         </AnchorPane>
