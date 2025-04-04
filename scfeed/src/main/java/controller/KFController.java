@@ -229,8 +229,9 @@ public class KFController {
     private void addToParty(){
         addedToPartyLabel.setVisible(true);
         partyMembers.add(addToPartyField.getText());
+        fileController.setParty(String.join(",", partyMembers));
         addToPartyField.clear();
-        fillSharedUsersList();
+        fillPartyMembersList();
         showSaveDuration.setOnFinished(event -> addedToPartyLabel.setVisible(false));
         showSaveDuration.play();
     }
@@ -256,18 +257,21 @@ public class KFController {
         button.setTextFill(Color.WHITE);
         button.setOnAction(e -> {
             partyMembers.remove(name);
-            fillSharedUsersList();
+            fileController.setParty(String.join(",", partyMembers));
+            fillPartyMembersList();
         });
 
         hbox.getChildren().addAll(label, button);
         return hbox;
     }
 
-    private void fillSharedUsersList() {
+    private void fillPartyMembersList() {
         partyList.getChildren().clear();
         for (String i : partyMembers) {
-            HBox userBox = makeTheBox(i);
-            partyList.getChildren().add(userBox);
+            if (!i.isEmpty()){
+                HBox userBox = makeTheBox(i);
+                partyList.getChildren().add(userBox);
+            }
         }
     }
 
@@ -358,10 +362,6 @@ public class KFController {
     public void start() {
         System.out.println("started");
 
-        partyMembers.add("Cpotato");
-        partyMembers.add("Coolestjonas");
-        partyMembers.add("Legeend");
-
         audioFileErrorMsg.setVisible(false);
         savedUsernameLabel.setVisible(false);
         fileErrorMsg.setVisible(false);
@@ -384,9 +384,12 @@ public class KFController {
         username = fileController.getUsername();
         usernameField.setText(username);
 
+        partyMembers = new ArrayList<>(List.of(fileController.getParty().split(",")));
+        partyMembers.removeIf(String::isEmpty);
+
         fillListView();
         getAlarmAudio();
-        fillSharedUsersList();
+        fillPartyMembersList();
 
         boolean isAlarmOn = Boolean.valueOf(fileController.getAlarmToggle());
         alarmToggle.setSelected(isAlarmOn);

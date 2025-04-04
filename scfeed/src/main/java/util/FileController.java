@@ -26,6 +26,9 @@ public class FileController {
         if (preferences.get("SCLGalarmToggle", null) == null) {
             preferences.put("SCLGalarmToggle", "false");
         }
+        if (preferences.get("SCLGparty", null) == null) {
+            preferences.put("SCLGparty", "");
+        }
     }
 
     public String getFileLocation() {
@@ -38,6 +41,7 @@ public class FileController {
         System.out.println("File location updated to: " + newLocation);
     }
 
+
     public String getAudioFileLocation() {
         System.out.println("Fetched audio file location");
         return preferences.get("SCLGalarmSoundLocation", "defaultAlarmSoundLocation");
@@ -47,6 +51,7 @@ public class FileController {
         preferences.put("SCLGalarmSoundLocation", newLocation);
         System.out.println("Audio file location updated to: " + newLocation);
     }
+
 
     public String getVolume() {
         System.out.println("Fetched volume");
@@ -58,6 +63,7 @@ public class FileController {
         System.out.println("Volume updated to: " + newVolume);
     }
 
+
     public String getUsername() {
         System.out.println("Fetched username");
         return preferences.get("SCLGusername", "");
@@ -68,6 +74,7 @@ public class FileController {
         System.out.println("Username updated to: " + newUsername);
     }
 
+
     public String getAlarmToggle() {
         System.out.println("Fetched alarm toggle");
         return preferences.get("SCLGalarmToggle", "");
@@ -76,5 +83,16 @@ public class FileController {
     public void setAlarmToggle(String newUsername) {
         preferences.put("SCLGalarmToggle", newUsername);
         System.out.println("alarm toggle updated to: " + newUsername);
+    }
+
+
+    public String getParty() {
+        System.out.println("Fetched alarm toggle");
+        return preferences.get("SCLGparty", "");
+    }
+
+    public void setParty(String newUsername) {
+        preferences.put("SCLGparty", newUsername);
+        System.out.println("party updated to: " + newUsername);
     }
 }
