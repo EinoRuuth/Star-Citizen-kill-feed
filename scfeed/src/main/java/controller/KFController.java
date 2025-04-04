@@ -182,6 +182,7 @@ public class KFController {
             double volume = Double.valueOf(fileController.getVolume());
             player.setVolume(volume);
             volumeSlider.setValue(volume*100);
+            volumeLabel.setText(String.valueOf((int) (volume * 100)));
             audioFileLocations.setText("File: "+audioFileLocation);
         } else {
             System.err.println("Audio file not found: " + audioFile.getAbsolutePath());
