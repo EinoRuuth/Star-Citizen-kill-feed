@@ -175,12 +175,6 @@
                                     fx:id="addedToPartyLabel">
                                 </Label>
                             </VBox>
-                            <!--Idk
-                            how to add a gap so i do this-->
-                            <Label text="" alignment="CENTER" textAlignment="CENTER"
-                                styleClass="section-title"
-                                mouseTransparent="true">
-                            </Label>
                             <ScrollPane fitToWidth="true" styleClass="party-list" maxWidth="230">
                                 <content>
                                     <VBox spacing="5" fx:id="partyList" styleClass="kill-list"

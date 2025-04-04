@@ -61,6 +61,9 @@ public class KFController {
     private final PauseTransition showSaveDuration = new PauseTransition(Duration.seconds(2));
 
     public void addKill(List<String> kill){
+        if (!kill.contains(username) && !partyMembers.stream().anyMatch(kill::contains)) {
+            playSound();
+        }
         PlayerKills.getChildren().add(0, createTextFlowWithBoldText(kill));
     }
 
@@ -83,12 +86,12 @@ public class KFController {
         PlayerKills.getChildren().clear();
         for (List<String> kill : gameLogParser.getPlayerKills()){
             if (excludeSelf.isSelected()){
-                if (kill.contains(username)){
+                if (kill.get(5).contains(username)){
                     continue;
                 }
             }
             if (excludeParty.isSelected()) {
-                if (partyMembers.stream().anyMatch(kill::contains)){
+                if (partyMembers.stream().anyMatch(kill.get(5)::contains)){
                     continue;
                 }
             }
@@ -105,7 +108,7 @@ public class KFController {
 
     public TextFlow createTextFlowWithBoldText(List<String> input) {
         TextFlow textFlow = new TextFlow();
-        if (!input.contains(username)) {
+        if (!input.contains(username) && !partyMembers.stream().anyMatch(input::contains)) {
             textFlow.setStyle("-fx-background-color: #373737;");
         }
         int loopTime = 0;
