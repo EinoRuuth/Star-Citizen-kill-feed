@@ -21,11 +21,15 @@
 - **Real time updating**: The lists update in real time when a kill happends ingame. 
 - **JavaFX client**: Multiplatform compatibility with a responsive UI.  
 
+<br/>
 
-New functionality incoming..
-- Better looking UI
-- alert when someone kills an npc
-- a way to add players from party so that theirs kills dont trigger an alarm
+- **Alarm**: a sound will play when enemy kills an NPC or a player
+- **List popouts**: lists can now be popped out to their own windows
+- **Excluding self/party**: self and party members can be excluded from showing in player kill list
+
+
+New functionality WIP..
+- **History**: kills will be added to a history file, where it can be retrieved from when game.log is rewritten
 
 ## 📚 Documentation 
 
@@ -37,8 +41,7 @@ Install a jar file from [releases](https://github.com/EinoRuuth/Star-Citizen-kil
 If no data is shown and you have data in your game.log file. click the "file" button and choose the game.log file
 
 ### UI
-The styling of the UI currently is this,  
-any suggestions to styling/overall look is appreciated
+Any suggestions to styling/overall look is appreciated
 
 <img height="300" src="https://github.com/EinoRuuth/Star-Citizen-kill-feed/blob/main/Images/UI_31.3.25.png?raw=true">
 
