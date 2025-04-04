@@ -19,7 +19,7 @@ public class GUI extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         System.out.println("Loading FXML file...");
-        scene = new Scene(getLoader("SCglParser_v1_responsive", stage), 670, 405);
+        scene = new Scene(getLoader("SCglParser_v2", stage), 670, 405);
         System.out.println("FXML file loaded successfully.");
         stage.setTitle("SC Kill feed");
         stage.setScene(scene);

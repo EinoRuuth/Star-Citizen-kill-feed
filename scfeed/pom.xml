@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" 
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>code</groupId>
-  <artifactId>scglparser</artifactId>
+  <artifactId>scfeed</artifactId>
   <version>1.0</version>
 
-  <name>scglparser</name>
-  <!-- FIXME change it to the project's website -->
-  <url>http://www.example.com</url>
+  <name>scfeed</name>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -53,6 +51,18 @@
             <artifactId>javafx-base</artifactId>
             <version>20.0.1</version>
         </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-media</artifactId>
+            <version>20.0.1</version>
+            <classifier>win</classifier>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-media</artifactId>
+            <version>20.0.1</version>
+            <classifier>linux</classifier>
+        </dependency>
 
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -79,7 +89,7 @@
     </dependencies>
 
     <build>
-        <finalName>sc_kill_feed_v1.5.2</finalName>
+        <finalName>sc_kill_feed_v2</finalName>
         <plugins>
             <!-- making an executable javafx application -->
             <plugin>
@@ -93,7 +103,7 @@
                             <goal>shade</goal>
                         </goals>
                         <configuration>
-                            <finalName>sc_kill_feed_v1.5.2</finalName>
+                            <finalName>sc_kill_feed_v2</finalName>
                             <transformers>
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
                                     <mainClass>Main</mainClass>
