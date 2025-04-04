@@ -1,0 +1,168 @@
+.root {
+    -fx-background-color: #1A1D21;
+    -fx-padding: 10;
+    -fx-font-family: "Arial";
+}
+
+.add-padding {
+    -fx-padding: 10 !important;
+}
+
+.popout-button {
+    -fx-background-color: transparent;
+    -fx-padding: 2;
+    -fx-font-size: 16px;
+    -fx-text-fill: #00aaff;
+    -fx-font-weight: bold;
+}
+
+.move-right {
+    -fx-translate-x: 15px;
+}
+
+.tab-pane .tab-header-area {
+    -fx-background: #1A1D21 !important;
+}
+
+.tab-pane{
+    -fx-padding: 0 !important;
+}
+
+.tab-pane .tab {
+    -fx-background-color: #0077cc;
+    -fx-font-size: 25px;
+}
+
+.tab-pane .tab .text {
+    -fx-rotate: 90;
+    -fx-alignment: center;
+}
+
+.tab-pane .tab:selected {
+    -fx-background-color: #00aaff;
+    -fx-font-size: 25px;
+}
+
+.title {
+    -fx-font-size: 20px;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+.section-title {
+    -fx-font-size: 16px;
+    -fx-text-fill: #00aaff;
+    -fx-font-weight: bold;
+    -fx-padding: 5 0;
+}
+
+.error-text{
+    -fx-font-size: 12px;
+    -fx-text-fill: red;
+    -fx-translate-x: 15px;
+    -fx-padding: 5 0;
+}
+
+.saved-text{
+    -fx-font-size: 14px;
+    -fx-text-fill: green;
+    -fx-translate-x: 15px;
+    -fx-padding: 5 0;
+}
+
+.slider-text{
+    -fx-font-size: 12px;
+    -fx-text-fill: lightgrey;
+    -fx-padding: 5 0;
+    -fx-translate-x: 15px;
+}
+
+.file-text{
+    -fx-font-size: 10px;
+    -fx-text-fill: lightgrey;
+    -fx-padding: 5 0;
+    -fx-translate-x: 15px;
+}
+
+.file-text-audio{
+    -fx-font-size: 10px;
+    -fx-text-fill: lightgrey;
+    -fx-padding: 5 0;
+    -fx-translate-x: 10px;
+}
+
+.section-title-big {
+    -fx-font-size: 28px;
+    -fx-text-fill: #8186E4;
+    -fx-font-weight: bold;
+    -fx-padding: 5 0;
+}
+
+.section-title-small {
+    -fx-font-size: 12px;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-translate-x: 15px;
+}
+
+.section-item-button {
+    -fx-background-color: linear-gradient(to bottom, #00aaff, #0077cc);
+    -fx-text-fill: white;
+    -fx-padding: 5 10;
+    -fx-translate-x: 15px;
+    -fx-background-radius: 5;
+}
+
+.section-item-button-small {
+    -fx-background-color: linear-gradient(to bottom, #00aaff, #0077cc);
+    -fx-text-fill: white;
+    -fx-padding: 2.5 5;
+    -fx-translate-x: 15px;
+    -fx-background-radius: 2;
+}
+
+.section-item-checkbox{
+    -fx-text-fill: white;
+    -fx-translate-x: 30px;
+}
+
+.list-checkbox{
+    -fx-text-fill: white;
+    -fx-padding: 8 0 0 20;
+}
+
+.section-item-slider{
+    -fx-translate-x: 15px;
+}
+
+.slider .track {
+    -fx-background-color: linear-gradient(to bottom, #00aaff, #0077cc);
+}
+
+.section-item-textfield{
+    -fx-background-color: #353a45;
+    -fx-text-fill: white;
+    -fx-translate-x: 15px;
+}
+
+.kill-list {
+    -fx-background-color: #282C34;
+    -fx-text-fill: white;
+    -fx-border-color: #3A3F4B;
+    -fx-border-radius: 5;
+}
+
+.party-list {
+    -fx-background-color: #282C34;
+    -fx-text-fill: white;
+    -fx-border-color: #3A3F4B;
+    -fx-border-radius: 5;
+    -fx-padding: 2;
+}
+
+.rsi-button {
+    -fx-background-color: linear-gradient(to bottom, #00aaff, #0077cc);
+    -fx-text-fill: white;
+    -fx-padding: 5 10;
+    -fx-background-radius: 5;
+}
