@@ -15,6 +15,7 @@ import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Side;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TabPane;
@@ -32,15 +33,17 @@ import util.GameLogParser;
 
 public class KFController {
     private GameLogParser gameLogParser;
-    @FXML VBox PlayerKills, ShipKills, partyList;
-    @FXML Button fileButton;
-    @FXML TabPane MainTabPane;
-    @FXML Slider volumeSlider;
-    @FXML TextField usernameField, addToPartyField;
-    @FXML Label volumeLabel, audioFileErrorMsg, savedUsernameLabel, audioFileLocations, fileErrorMsg, fileLocations, addedToPartyLabel;
-    List<String> partyMembers = new ArrayList<String>();
-    File audioFile;
-    MediaPlayer player;
+    @FXML private VBox PlayerKills, ShipKills, partyList;
+    @FXML private Button fileButton;
+    @FXML private TabPane MainTabPane;
+    @FXML private Slider volumeSlider;
+    @FXML private TextField usernameField, addToPartyField;
+    @FXML private CheckBox alarmToggle;
+    @FXML private Label volumeLabel, audioFileErrorMsg, savedUsernameLabel, audioFileLocations, fileErrorMsg, fileLocations, addedToPartyLabel;
+    private List<String> partyMembers = new ArrayList<String>();
+    private Boolean alarmOn;
+    private File audioFile;
+    private MediaPlayer player;
     private GUI gui;
     private Stage stage;
     private FileController fileController;
@@ -177,17 +180,21 @@ public class KFController {
 
     @FXML
     private void playSound(){
-        System.out.println("played audio file");
-        if (audioFile.exists()) {
-            audioFileErrorMsg.setVisible(false);
-            if (player.getStatus() == MediaPlayer.Status.PLAYING || player.getStatus() == MediaPlayer.Status.PAUSED) {
-                player.stop();
+        if (alarmOn){
+            System.out.println("played audio file");
+            if (audioFile.exists()) {
+                audioFileErrorMsg.setVisible(false);
+                if (player.getStatus() == MediaPlayer.Status.PLAYING || player.getStatus() == MediaPlayer.Status.PAUSED) {
+                    player.stop();
+                }
+                player.play();
+            } else {
+                System.err.println("Error playing audofile: " + audioFile.getAbsolutePath());
+                audioFileErrorMsg.setVisible(true);
+                audioFileErrorMsg.setText("Error playing audofile: " + audioFile.getAbsolutePath());
             }
-            player.play();
         } else {
-            System.err.println("Error playing audofile: " + audioFile.getAbsolutePath());
-            audioFileErrorMsg.setVisible(true);
-            audioFileErrorMsg.setText("Error playing audofile: " + audioFile.getAbsolutePath());
+            System.out.println("Alarm is toggled off");
         }
     }
 
@@ -251,8 +258,16 @@ public class KFController {
         }
     }
 
+    @FXML
+    private void toggleAlarm(){
+        Boolean toggled = alarmToggle.isSelected();
+        alarmOn = toggled;
+        fileController.setAlarmToggle(String.valueOf(toggled));
+    }
+
     public void start() {
         System.out.println("started");
+        
         partyMembers.add("Cpotato");
         partyMembers.add("Coolestjonas");
         partyMembers.add("Legeend");
@@ -278,6 +293,9 @@ public class KFController {
         fillSharedUsersList();
 
         usernameField.setText(fileController.getUsername());
+        boolean isAlarmOn = Boolean.valueOf(fileController.getAlarmToggle());
+        alarmToggle.setSelected(isAlarmOn);
+        alarmOn = isAlarmOn;
     }
 
     public void shutdown() {

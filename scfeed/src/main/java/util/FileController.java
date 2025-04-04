@@ -23,6 +23,9 @@ public class FileController {
         if (preferences.get("SCLGusername", null) == null) {
             preferences.put("SCLGusername", "");
         }
+        if (preferences.get("SCLGalarmToggle", null) == null) {
+            preferences.put("SCLGalarmToggle", "false");
+        }
     }
 
     public String getFileLocation() {
@@ -63,5 +66,15 @@ public class FileController {
     public void setUsername(String newUsername) {
         preferences.put("SCLGusername", newUsername);
         System.out.println("Username updated to: " + newUsername);
+    }
+
+    public String getAlarmToggle() {
+        System.out.println("Fetched alarm toggle");
+        return preferences.get("SCLGalarmToggle", "");
+    }
+
+    public void setAlarmToggle(String newUsername) {
+        preferences.put("SCLGalarmToggle", newUsername);
+        System.out.println("alarm toggle updated to: " + newUsername);
     }
 }

@@ -194,7 +194,7 @@
                             </Label>
                             <!-- TODO add action -->
                             <CheckBox fx:id="alarmToggle" text="Toggle alarm" mnemonicParsing="false" 
-                                styleClass="section-item-checkbox"
+                                styleClass="section-item-checkbox" onAction="#toggleAlarm"
                             />
 
                             <!--Idk how to add a gap so i do this-->
