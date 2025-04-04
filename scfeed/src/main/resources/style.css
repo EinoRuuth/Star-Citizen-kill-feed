@@ -126,6 +126,11 @@
     -fx-translate-x: 30px;
 }
 
+.list-checkbox{
+    -fx-text-fill: white;
+    -fx-padding: 8 0 0 20;
+}
+
 .section-item-slider{
     -fx-translate-x: 15px;
 }

@@ -45,7 +45,7 @@ public class KFController {
     @FXML private TabPane MainTabPane;
     @FXML private Slider volumeSlider;
     @FXML private TextField usernameField, addToPartyField;
-    @FXML private CheckBox alarmToggle;
+    @FXML private CheckBox alarmToggle, excludeSelf, excludeParty;
     @FXML private Label volumeLabel, audioFileErrorMsg, savedUsernameLabel, audioFileLocations, fileErrorMsg, fileLocations, addedToPartyLabel;
     private List<String> partyMembers = new ArrayList<String>();
     private String username;
@@ -76,13 +76,24 @@ public class KFController {
         this.stage = stage;
     }
 
+    @FXML
     private void fillListView() {
         System.out.println("Filling list view...");
 
         PlayerKills.getChildren().clear();
-        gameLogParser.getPlayerKills().forEach(kill -> {
+        for (List<String> kill : gameLogParser.getPlayerKills()){
+            if (excludeSelf.isSelected()){
+                if (kill.contains(username)){
+                    continue;
+                }
+            }
+            if (excludeParty.isSelected()) {
+                if (partyMembers.stream().anyMatch(kill::contains)){
+                    continue;
+                }
+            }
             PlayerKills.getChildren().add(0, createTextFlowWithBoldText(kill));
-        });
+        }
 
         ShipKills.getChildren().clear();
         gameLogParser.getShipKills().forEach(destruction -> {

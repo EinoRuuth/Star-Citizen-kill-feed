@@ -78,6 +78,12 @@
                                             </StackPane>
                                         </graphic>
                                     </Button>
+                                    <CheckBox fx:id="excludeSelf" text="Exclude self"
+                                        mnemonicParsing="false" onAction="#fillListView"
+                                        styleClass="list-checkbox" />
+                                    <CheckBox fx:id="excludeParty" text="Exclude party members"
+                                        mnemonicParsing="false" onAction="#fillListView"
+                                        styleClass="list-checkbox" />
                                 </HBox>
                                 <ScrollPane fitToWidth="true" styleClass="kill-list"
                                     GridPane.rowIndex="1" fx:id="playerKillContainer">
