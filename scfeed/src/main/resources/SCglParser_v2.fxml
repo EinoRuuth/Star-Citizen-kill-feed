@@ -16,235 +16,305 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.shape.SVGPath?>
 
-<TabPane    fx:id="MainTabPane" 
-            maxHeight="-Infinity" 
-            maxWidth="-Infinity" 
-            minHeight="-Infinity" 
-            minWidth="-Infinity" 
-            prefHeight="Infinity" 
-            prefWidth="Infinity" 
-            tabClosingPolicy="UNAVAILABLE" 
-            xmlns:fx="http://javafx.com/fxml/1" 
-            xmlns="http://javafx.com/javafx/23.0.1" 
-            fx:controller="controller.KFController" 
-            stylesheets="@style.css">
-  <tabs>
-    <Tab text="☰">
-      <content>
-        <AnchorPane
-            prefHeight="Infinity" prefWidth="Infinity">
-            <children>
-                <GridPane AnchorPane.topAnchor="5.0" AnchorPane.leftAnchor="5.0" 
-                        AnchorPane.rightAnchor="5.0" AnchorPane.bottomAnchor="5.0">
-                    <rowConstraints>
-                        <RowConstraints percentHeight="50.0" vgrow="ALWAYS"/>
-                        <RowConstraints percentHeight="50.0" vgrow="ALWAYS"/>
-                    </rowConstraints>
-                    <VBox spacing="10" GridPane.rowIndex="0">
-                        <Label text="Player kills" alignment="CENTER" textAlignment="CENTER" 
-                            styleClass="section-title" mouseTransparent="true" GridPane.rowIndex="0"/>
-                        <ScrollPane fitToWidth="true" styleClass="kill-list" GridPane.rowIndex="1">
-                            <content>
-                                <VBox fx:id="PlayerKills" styleClass="kill-list" minHeight="32.0"
-                                    maxHeight="Infinity" VBox.vgrow="ALWAYS"/>
-                            </content>
-                        </ScrollPane>
-                    </VBox>
-                    <VBox spacing="10" GridPane.rowIndex="1">
-                        <Label text="Ship kills" alignment="CENTER" textAlignment="CENTER" 
-                            styleClass="section-title" mouseTransparent="true" GridPane.rowIndex="2"/>
-                        <ScrollPane fitToWidth="true" styleClass="kill-list" GridPane.rowIndex="3">
-                            <content>
-                                <VBox fx:id="ShipKills" styleClass="kill-list" minHeight="32.0"
-                                    maxHeight="Infinity" VBox.vgrow="ALWAYS"/>
-                            </content>
-                        </ScrollPane>
-                    </VBox>
-                </GridPane>
-            </children>
-        </AnchorPane>
-      </content>
-    </Tab>
-    <Tab text="👥">
-      <content>
-        <AnchorPane prefHeight="Infinity" prefWidth="Infinity" >
-            <children>
-                <VBox spacing="10.0" AnchorPane.topAnchor="5.0" AnchorPane.leftAnchor="5.0" 
-                    AnchorPane.rightAnchor="5.0" AnchorPane.bottomAnchor="5.0" styleClass="add-padding">
-                    <Label text="Party" alignment="CENTER" textAlignment="CENTER" 
-                        styleClass="section-title-big"
-                        mouseTransparent="true">
-                    </Label>
-                    <Label text="Add party members here so alarm wont trigger on their kills" alignment="CENTER"
-                        styleClass="section-title"
-                        mouseTransparent="true">
-                    </Label>
-                    <TextField fx:id="addToPartyField" 
-                        styleClass="section-item-textfield" 
-                        promptText="Enter party members username"
-                        maxWidth="200"
-                    />
-                    <VBox>
-                        <Button fx:id="fileButton" text="Add to party" mnemonicParsing="false" 
-                            styleClass="section-item-button"
-                            onAction="#addToParty"
-                        />
-                        <Label text="✓ Added to party" alignment="CENTER" textAlignment="CENTER" 
-                            mouseTransparent="true" styleClass="saved-text"
-                            fx:id="addedToPartyLabel">
-                        </Label>
-                    </VBox>
-                    <!--Idk how to add a gap so i do this-->
-                    <Label text="" alignment="CENTER" textAlignment="CENTER" 
-                        styleClass="section-title"
-                        mouseTransparent="true">
-                    </Label>
-                    <ScrollPane fitToWidth="true" styleClass="party-list" maxWidth="230">
-                        <content>
-                            <VBox spacing="5" fx:id="partyList" styleClass="kill-list" minHeight="32.0" maxWidth="230"
-                                maxHeight="Infinity" VBox.vgrow="ALWAYS"/>
-                        </content>
-                    </ScrollPane>
-                </VBox>
-            </children>
-        </AnchorPane>
-      </content>
-    </Tab>
-    <Tab>
-      <graphic>
-        <ImageView fitWidth="25.0" fitHeight="25.0">
-          <image>
-            <Image url="@settings.png" />
-          </image>
-        </ImageView>
-      </graphic>
-      <content>
-        <AnchorPane prefHeight="Infinity" prefWidth="Infinity" >
-            <children>
-                <VBox styleClass="add-padding">
-                    <Label text="Settings" alignment="CENTER" textAlignment="CENTER" 
-                        styleClass="section-title-big"
-                        mouseTransparent="true">
-                    </Label>
-                    <HBox spacing="50.0" AnchorPane.topAnchor="5.0" AnchorPane.leftAnchor="5.0" 
-                            AnchorPane.bottomAnchor="5.0">
-                        <VBox spacing="10.0" HBox.hgrow="ALWAYS">
-                            <Label text="File location" alignment="CENTER" textAlignment="CENTER" 
-                                styleClass="section-title"
-                                mouseTransparent="true">
-                            </Label>
-                            <Label text="Set game.log location" alignment="CENTER" textAlignment="CENTER" 
-                                styleClass="section-title-small"
-                                mouseTransparent="true">
-                            </Label>
-                            <VBox styleClass="move-right">
-                                <HBox spacing="10">
-                                    <!-- TODO add action -->
-                                    <Button fx:id="fileButton" text="Set File" mnemonicParsing="false" 
-                                        styleClass="section-item-button"
-                                        onAction="#handleFileChooser"
-                                    />
-                                    <Label text="This is error msg" alignment="CENTER" textAlignment="CENTER" 
-                                        styleClass="error-text" fx:id="fileErrorMsg"
-                                        mouseTransparent="true">
-                                    </Label>
-                                </HBox>
-                                <Label text="File Location" alignment="CENTER" textAlignment="LEFT" 
-                                    styleClass="file-text" fx:id="fileLocations"
-                                    mouseTransparent="true" wrapText="true" maxWidth="200">
-                                </Label>
-                            </VBox>
-
-                            <!--Idk how to add a gap so i do this-->
-                            <Label text="" alignment="CENTER" textAlignment="CENTER" 
-                                styleClass="section-title"
-                                mouseTransparent="true">
-                            </Label>
-
-                            <Label text="Username" alignment="CENTER" textAlignment="CENTER" 
-                                styleClass="section-title"
-                                mouseTransparent="true">
-                            </Label>
-                            <Label maxWidth="200" wrapText="true" text="Add username to this so alarm never triggers on you" alignment="CENTER" textAlignment="LEFT" 
-                                styleClass="section-title-small"
-                                mouseTransparent="true">
-                            </Label>
-                            <VBox>
-                            <TextField fx:id="usernameField" 
-                                styleClass="section-item-textfield" 
-                                promptText="Enter your username here"
-                                onKeyReleased="#checkUsername"
-                            />
-                            <Label text="✓ Saved" alignment="CENTER" textAlignment="CENTER" 
-                                mouseTransparent="true" styleClass="saved-text"
-                                fx:id="savedUsernameLabel">
-                            </Label>
-                            </VBox>
-                        </VBox>
-                        <VBox spacing="10.0" AnchorPane.topAnchor="5.0" AnchorPane.leftAnchor="5.0" 
+<TabPane fx:id="MainTabPane"
+    maxHeight="-Infinity"
+    maxWidth="-Infinity"
+    minHeight="-Infinity"
+    minWidth="-Infinity"
+    prefHeight="Infinity"
+    prefWidth="Infinity"
+    tabClosingPolicy="UNAVAILABLE"
+    xmlns:fx="http://javafx.com/fxml/1"
+    xmlns="http://javafx.com/javafx/23.0.1"
+    fx:controller="controller.KFController"
+    stylesheets="@style.css">
+    <tabs>
+        <Tab text="☰">
+            <content>
+                <AnchorPane
+                    prefHeight="Infinity" prefWidth="Infinity">
+                    <children>
+                        <GridPane fx:id="mainGrid" AnchorPane.topAnchor="5.0"
+                            AnchorPane.leftAnchor="5.0"
                             AnchorPane.rightAnchor="5.0" AnchorPane.bottomAnchor="5.0">
-                            <Label text="Alarm" alignment="CENTER" textAlignment="CENTER" 
+                            <rowConstraints>
+                                <RowConstraints percentHeight="50.0" vgrow="ALWAYS" />
+                                <RowConstraints percentHeight="50.0" vgrow="ALWAYS" />
+                            </rowConstraints>
+                            <VBox fx:id="playerFeedContainer" spacing="10" GridPane.rowIndex="0">
+                                <HBox>
+                                    <Label text="Player kills" alignment="CENTER"
+                                        textAlignment="CENTER"
+                                        styleClass="section-title" mouseTransparent="true"
+                                        GridPane.rowIndex="0" />
+                                    <Button fx:id="popoutPlayerKills" styleClass="popout-button"
+                                        prefWidth="30" prefHeight="30"
+                                        onAction="#popoutPlayerKillsWindow">
+                                        <graphic>
+                                            <StackPane>
+                                                <SVGPath fill="white"
+                                                    content="M12 4h2.586L9.293 9.293l1.414 1.414L16 5.414V8h2V2h-6v2z" />
+                                                <SVGPath fill="white"
+                                                    content="M4 4h6v2H4v10h10v-6h2v6a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z" />
+                                            </StackPane>
+                                        </graphic>
+                                    </Button>
+                                </HBox>
+                                <ScrollPane fitToWidth="true" styleClass="kill-list"
+                                    GridPane.rowIndex="1" fx:id="playerKillContainer">
+                                    <content>
+                                        <VBox fx:id="PlayerKills" styleClass="kill-list"
+                                            minHeight="32.0"
+                                            maxHeight="Infinity" VBox.vgrow="ALWAYS" />
+                                    </content>
+                                </ScrollPane>
+                            </VBox>
+                            <VBox fx:id="shipFeedContainer" spacing="10" GridPane.rowIndex="1">
+                                <HBox>
+                                    <Label text="Ship kills" alignment="CENTER"
+                                        textAlignment="CENTER"
+                                        styleClass="section-title" mouseTransparent="true"
+                                        GridPane.rowIndex="2" />
+                                    <Button fx:id="popoutShipKills" styleClass="popout-button"
+                                        prefWidth="30" prefHeight="30"
+                                        onAction="#popoutShipKillsWindow">
+                                        <graphic>
+                                            <StackPane>
+                                                <SVGPath fill="white"
+                                                    content="M12 4h2.586L9.293 9.293l1.414 1.414L16 5.414V8h2V2h-6v2z" />
+                                                <SVGPath fill="white"
+                                                    content="M4 4h6v2H4v10h10v-6h2v6a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z" />
+                                            </StackPane>
+                                        </graphic>
+                                    </Button>
+                                </HBox>
+                                <ScrollPane fitToWidth="true" styleClass="kill-list"
+                                    GridPane.rowIndex="3" fx:id="shipKillContainer">
+                                    <content>
+                                        <VBox fx:id="ShipKills" styleClass="kill-list"
+                                            minHeight="32.0"
+                                            maxHeight="Infinity" VBox.vgrow="ALWAYS" />
+                                    </content>
+                                </ScrollPane>
+                            </VBox>
+                        </GridPane>
+                    </children>
+                </AnchorPane>
+            </content>
+        </Tab>
+        <Tab text="👥">
+            <content>
+                <AnchorPane prefHeight="Infinity" prefWidth="Infinity">
+                    <children>
+                        <VBox spacing="10.0" AnchorPane.topAnchor="5.0" AnchorPane.leftAnchor="5.0"
+                            AnchorPane.rightAnchor="5.0" AnchorPane.bottomAnchor="5.0"
+                            styleClass="add-padding">
+                            <Label text="Party" alignment="CENTER" textAlignment="CENTER"
+                                styleClass="section-title-big"
+                                mouseTransparent="true">
+                            </Label>
+                            <Label
+                                text="Add party members here so alarm wont trigger on their kills"
+                                alignment="CENTER"
                                 styleClass="section-title"
                                 mouseTransparent="true">
                             </Label>
-                            <Label text="This toggles enemy nearby alarm" alignment="CENTER" textAlignment="CENTER" 
-                                styleClass="section-title-small"
-                                mouseTransparent="true">
-                            </Label>
-                            <!-- TODO add action -->
-                            <CheckBox fx:id="alarmToggle" text="Toggle alarm" mnemonicParsing="false" 
-                                styleClass="section-item-checkbox" onAction="#toggleAlarm"
+                            <TextField fx:id="addToPartyField"
+                                styleClass="section-item-textfield"
+                                promptText="Enter party members username"
+                                maxWidth="200"
                             />
-
-                            <!--Idk how to add a gap so i do this-->
-                            <Label text="" alignment="CENTER" textAlignment="CENTER" 
-                                mouseTransparent="true">
-                            </Label>
-
-                            <Label text="Set alarm sound file (has to be mp3)" alignment="CENTER" textAlignment="CENTER" 
-                                styleClass="section-title-small"
-                                mouseTransparent="true">
-                            </Label>
-                            <VBox styleClass="move-right">
-                                <HBox spacing="10">
-                                    <!-- TODO add action -->
-                                    <Button fx:id="fileButton" text="Set File" mnemonicParsing="false" 
-                                        styleClass="section-item-button"
-                                        onAction="#handleAudioFileChooser"
-                                    />
-                                    <Label text="This is error msg" alignment="CENTER" textAlignment="CENTER" 
-                                        styleClass="error-text" fx:id="audioFileErrorMsg"
-                                        mouseTransparent="true">
-                                    </Label>
-                                </HBox>
-                                <Label text="File Location" alignment="CENTER" textAlignment="LEFT" 
-                                    styleClass="file-text-audio" fx:id="audioFileLocations"
-                                    mouseTransparent="true" wrapText="true" maxWidth="200">
+                            <VBox>
+                                <Button fx:id="fileButton" text="Add to party"
+                                    mnemonicParsing="false"
+                                    styleClass="section-item-button"
+                                    onAction="#addToParty"
+                                />
+                                <Label text="✓ Added to party" alignment="CENTER"
+                                    textAlignment="CENTER"
+                                    mouseTransparent="true" styleClass="saved-text"
+                                    fx:id="addedToPartyLabel">
                                 </Label>
                             </VBox>
-
-                            <!--Idk how to add a gap so i do this-->
-                            <Label text="" alignment="CENTER" textAlignment="CENTER" 
+                            <!--Idk
+                            how to add a gap so i do this-->
+                            <Label text="" alignment="CENTER" textAlignment="CENTER"
+                                styleClass="section-title"
                                 mouseTransparent="true">
                             </Label>
-
-                            <HBox spacing="10.0" alignment="CENTER">
-                                <Slider fx:id="volumeSlider" layoutX="196.0" layoutY="119.0" majorTickUnit="10.0" minorTickCount="5" 
-                                        onMouseReleased="#ChangeVolume" onMouseDragged="#updateVolumeText"
-                                        prefWidth="200.0" value="15.0" styleClass="section-item-slider" />
-                                <Label fx:id="volumeLabel" text="15" styleClass="slider-text" />
-                            </HBox>
-                            <Button fx:id="fileButton" text="test sound" mnemonicParsing="false" 
-                                styleClass="section-item-button-small"
-                                onAction="#playSound"
-                            />
+                            <ScrollPane fitToWidth="true" styleClass="party-list" maxWidth="230">
+                                <content>
+                                    <VBox spacing="5" fx:id="partyList" styleClass="kill-list"
+                                        minHeight="32.0" maxWidth="230"
+                                        maxHeight="Infinity" VBox.vgrow="ALWAYS" />
+                                </content>
+                            </ScrollPane>
                         </VBox>
-                    </HBox>
-                </VBox>
-            </children>
-        </AnchorPane>
-      </content>
-    </Tab>
-  </tabs>
+                    </children>
+                </AnchorPane>
+            </content>
+        </Tab>
+        <Tab>
+            <graphic>
+                <ImageView fitWidth="25.0" fitHeight="25.0">
+                    <image>
+                        <Image url="@settings.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+            <content>
+                <AnchorPane prefHeight="Infinity" prefWidth="Infinity">
+                    <children>
+                        <VBox styleClass="add-padding">
+                            <Label text="Settings" alignment="CENTER" textAlignment="CENTER"
+                                styleClass="section-title-big"
+                                mouseTransparent="true">
+                            </Label>
+                            <HBox spacing="50.0" AnchorPane.topAnchor="5.0"
+                                AnchorPane.leftAnchor="5.0"
+                                AnchorPane.bottomAnchor="5.0">
+                                <VBox spacing="10.0" HBox.hgrow="ALWAYS">
+                                    <Label text="File location" alignment="CENTER"
+                                        textAlignment="CENTER"
+                                        styleClass="section-title"
+                                        mouseTransparent="true">
+                                    </Label>
+                                    <Label text="Set game.log location" alignment="CENTER"
+                                        textAlignment="CENTER"
+                                        styleClass="section-title-small"
+                                        mouseTransparent="true">
+                                    </Label>
+                                    <VBox styleClass="move-right">
+                                        <HBox spacing="10">
+                                            <!-- TODO add action -->
+                                            <Button fx:id="fileButton" text="Set File"
+                                                mnemonicParsing="false"
+                                                styleClass="section-item-button"
+                                                onAction="#handleFileChooser"
+                                            />
+                                            <Label text="This is error msg" alignment="CENTER"
+                                                textAlignment="CENTER"
+                                                styleClass="error-text" fx:id="fileErrorMsg"
+                                                mouseTransparent="true">
+                                            </Label>
+                                        </HBox>
+                                        <Label text="File Location" alignment="CENTER"
+                                            textAlignment="LEFT"
+                                            styleClass="file-text" fx:id="fileLocations"
+                                            mouseTransparent="true" wrapText="true" maxWidth="200">
+                                        </Label>
+                                    </VBox>
+
+                                    <!--Idk
+                                    how to add a gap so i do this-->
+                                    <Label text="" alignment="CENTER" textAlignment="CENTER"
+                                        styleClass="section-title"
+                                        mouseTransparent="true">
+                                    </Label>
+
+                                    <Label text="Username" alignment="CENTER" textAlignment="CENTER"
+                                        styleClass="section-title"
+                                        mouseTransparent="true">
+                                    </Label>
+                                    <Label maxWidth="200" wrapText="true"
+                                        text="Add username to this so alarm never triggers on you"
+                                        alignment="CENTER" textAlignment="LEFT"
+                                        styleClass="section-title-small"
+                                        mouseTransparent="true">
+                                    </Label>
+                                    <VBox>
+                                        <TextField fx:id="usernameField"
+                                            styleClass="section-item-textfield"
+                                            promptText="Enter your username here"
+                                            onKeyReleased="#checkUsername"
+                                        />
+                                        <Label text="✓ Saved" alignment="CENTER"
+                                            textAlignment="CENTER"
+                                            mouseTransparent="true" styleClass="saved-text"
+                                            fx:id="savedUsernameLabel">
+                                        </Label>
+                                    </VBox>
+                                </VBox>
+                                <VBox spacing="10.0" AnchorPane.topAnchor="5.0"
+                                    AnchorPane.leftAnchor="5.0"
+                                    AnchorPane.rightAnchor="5.0" AnchorPane.bottomAnchor="5.0">
+                                    <Label text="Alarm" alignment="CENTER" textAlignment="CENTER"
+                                        styleClass="section-title"
+                                        mouseTransparent="true">
+                                    </Label>
+                                    <Label text="This toggles enemy nearby alarm" alignment="CENTER"
+                                        textAlignment="CENTER"
+                                        styleClass="section-title-small"
+                                        mouseTransparent="true">
+                                    </Label>
+                                    <!-- TODO add action -->
+                                    <CheckBox fx:id="alarmToggle" text="Toggle alarm"
+                                        mnemonicParsing="false"
+                                        styleClass="section-item-checkbox" onAction="#toggleAlarm"
+                                    />
+
+                                    <!--Idk
+                                    how to add a gap so i do this-->
+                                    <Label text="" alignment="CENTER" textAlignment="CENTER"
+                                        mouseTransparent="true">
+                                    </Label>
+
+                                    <Label text="Set alarm sound file (has to be mp3)"
+                                        alignment="CENTER" textAlignment="CENTER"
+                                        styleClass="section-title-small"
+                                        mouseTransparent="true">
+                                    </Label>
+                                    <VBox styleClass="move-right">
+                                        <HBox spacing="10">
+                                            <!-- TODO add action -->
+                                            <Button fx:id="fileButton" text="Set File"
+                                                mnemonicParsing="false"
+                                                styleClass="section-item-button"
+                                                onAction="#handleAudioFileChooser"
+                                            />
+                                            <Label text="This is error msg" alignment="CENTER"
+                                                textAlignment="CENTER"
+                                                styleClass="error-text" fx:id="audioFileErrorMsg"
+                                                mouseTransparent="true">
+                                            </Label>
+                                        </HBox>
+                                        <Label text="File Location" alignment="CENTER"
+                                            textAlignment="LEFT"
+                                            styleClass="file-text-audio" fx:id="audioFileLocations"
+                                            mouseTransparent="true" wrapText="true" maxWidth="200">
+                                        </Label>
+                                    </VBox>
+
+                                    <!--Idk
+                                    how to add a gap so i do this-->
+                                    <Label text="" alignment="CENTER" textAlignment="CENTER"
+                                        mouseTransparent="true">
+                                    </Label>
+
+                                    <HBox spacing="10.0" alignment="CENTER">
+                                        <Slider fx:id="volumeSlider" layoutX="196.0" layoutY="119.0"
+                                            majorTickUnit="10.0" minorTickCount="5"
+                                            onMouseReleased="#ChangeVolume"
+                                            onMouseDragged="#updateVolumeText"
+                                            prefWidth="200.0" value="15.0"
+                                            styleClass="section-item-slider" />
+                                        <Label fx:id="volumeLabel" text="15"
+                                            styleClass="slider-text" />
+                                    </HBox>
+                                    <Button fx:id="fileButton" text="test sound"
+                                        mnemonicParsing="false"
+                                        styleClass="section-item-button-small"
+                                        onAction="#playSound"
+                                    />
+                                </VBox>
+                            </HBox>
+                        </VBox>
+                    </children>
+                </AnchorPane>
+            </content>
+        </Tab>
+    </tabs>
 </TabPane>

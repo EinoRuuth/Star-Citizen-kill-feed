@@ -8,6 +8,11 @@
     -fx-padding: 10 !important;
 }
 
+.popout-button {
+    -fx-background-color: transparent;
+    -fx-padding: 2;
+}
+
 .move-right {
     -fx-translate-x: 15px;
 }

@@ -12,14 +12,19 @@ import javafx.util.Duration;
 import view.GUI;
 import util.FileController;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Side;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -32,8 +37,10 @@ import javafx.scene.paint.Color;
 import util.GameLogParser;
 
 public class KFController {
-    private GameLogParser gameLogParser;
-    @FXML private VBox PlayerKills, ShipKills, partyList;
+    public GameLogParser gameLogParser;
+    @FXML private GridPane mainGrid;
+    @FXML private VBox PlayerKills, ShipKills, partyList, playerFeedContainer, shipFeedContainer;
+    @FXML private ScrollPane shipKillContainer, playerKillContainer;
     @FXML private Button fileButton;
     @FXML private TabPane MainTabPane;
     @FXML private Slider volumeSlider;
@@ -42,6 +49,7 @@ public class KFController {
     @FXML private Label volumeLabel, audioFileErrorMsg, savedUsernameLabel, audioFileLocations, fileErrorMsg, fileLocations, addedToPartyLabel;
     private List<String> partyMembers = new ArrayList<String>();
     private Boolean alarmOn;
+    private Stage poputstage = new Stage();
     private File audioFile;
     private MediaPlayer player;
     private GUI gui;
@@ -82,7 +90,7 @@ public class KFController {
         System.out.println("list view filled");
     }
 
-    private TextFlow createTextFlowWithBoldText(List<String> input) {
+    public TextFlow createTextFlowWithBoldText(List<String> input) {
         TextFlow textFlow = new TextFlow();
         int loopTime = 0;
 
@@ -265,9 +273,67 @@ public class KFController {
         fileController.setAlarmToggle(String.valueOf(toggled));
     }
 
+    public void hidePlayerKillsList(){
+        System.out.println("this will hide the player kills list and make window 0/100");
+        mainGrid.getRowConstraints().get(0).setPercentHeight(0);
+        mainGrid.getRowConstraints().get(1).setPercentHeight(100);
+        playerFeedContainer.setVisible(false);
+    }
+
+    public void hideShipKillsList(){
+        System.out.println("this will hide the ship kills list and make window 100/0");
+        mainGrid.getRowConstraints().get(0).setPercentHeight(100);
+        mainGrid.getRowConstraints().get(1).setPercentHeight(0);
+        shipFeedContainer.setVisible(false);
+    }
+
+    public void resetLists(){
+        System.out.println("this would make both lists visible and make window 50/50");
+        mainGrid.getRowConstraints().get(0).setPercentHeight(50);
+        mainGrid.getRowConstraints().get(1).setPercentHeight(50);
+        playerFeedContainer.setVisible(true);
+        shipFeedContainer.setVisible(true);
+    }
+
+    private void openPopup(Boolean player){
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/poppedOutList.fxml"));
+        PopoutController controller;
+        try {
+            Scene scene = new Scene(loader.load(), 600, 300);
+            controller = loader.getController();
+            controller.setParentController(this);
+            poputstage.setOnHidden(e -> controller.close());
+            if (player) {
+                controller.startPlayerPopup();
+                poputstage.setTitle("Player kills");
+            } else {
+                controller.startShipPopup();
+                poputstage.setTitle("Ship kills");
+            }
+            poputstage.setScene(scene);
+            poputstage.getIcons().add(new Image(GUI.class.getResourceAsStream("/logo.png")));
+            poputstage.show();
+        } catch (Exception e) {
+            System.err.println("Error loading FXML file: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void popoutPlayerKillsWindow(){
+        System.out.println("popped out player kills");
+        openPopup(true);
+    }
+
+    @FXML
+    private void popoutShipKillsWindow(){
+        System.out.println("popped out ship kills");
+        openPopup(false);
+    }
+
     public void start() {
         System.out.println("started");
-        
+
         partyMembers.add("Cpotato");
         partyMembers.add("Coolestjonas");
         partyMembers.add("Legeend");
@@ -299,6 +365,7 @@ public class KFController {
     }
 
     public void shutdown() {
+        poputstage.close();
         gameLogParser.stop();
     }
 }
