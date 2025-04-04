@@ -48,6 +48,7 @@ public class KFController {
     @FXML private CheckBox alarmToggle;
     @FXML private Label volumeLabel, audioFileErrorMsg, savedUsernameLabel, audioFileLocations, fileErrorMsg, fileLocations, addedToPartyLabel;
     private List<String> partyMembers = new ArrayList<String>();
+    private String username;
     private Boolean alarmOn;
     private Boolean poppedOut = false;
     private Stage poputstage = new Stage();
@@ -93,6 +94,9 @@ public class KFController {
 
     public TextFlow createTextFlowWithBoldText(List<String> input) {
         TextFlow textFlow = new TextFlow();
+        if (!input.contains(username)) {
+            textFlow.setStyle("-fx-background-color: #373737;");
+        }
         int loopTime = 0;
 
         for (String s : input) {
@@ -275,7 +279,6 @@ public class KFController {
     }
 
     public void hidePlayerKillsList(){
-        System.out.println("this will hide the player kills list and make window 0/100");
         mainGrid.getRowConstraints().get(0).setPercentHeight(10);
         mainGrid.getRowConstraints().get(1).setPercentHeight(0);
         mainGrid.getRowConstraints().get(2).setPercentHeight(0);
@@ -285,7 +288,6 @@ public class KFController {
     }
 
     public void hideShipKillsList(){
-        System.out.println("this will hide the ship kills list and make window 100/0");
         mainGrid.getRowConstraints().get(0).setPercentHeight(0);
         mainGrid.getRowConstraints().get(1).setPercentHeight(90);
         mainGrid.getRowConstraints().get(2).setPercentHeight(10);
@@ -301,7 +303,6 @@ public class KFController {
     }
 
     public void resetLists(){
-        System.out.println("this would make both lists visible and make window 50/50");
         mainGrid.getRowConstraints().get(0).setPercentHeight(0);
         mainGrid.getRowConstraints().get(1).setPercentHeight(50);
         mainGrid.getRowConstraints().get(2).setPercentHeight(0);
@@ -379,11 +380,14 @@ public class KFController {
         gameLogParser = new GameLogParser(fileLocation, gui);
         System.out.println("Parser initialized");
         fileLocations.setText("File: "+fileLocation);
+
+        username = fileController.getUsername();
+        usernameField.setText(username);
+
         fillListView();
         getAlarmAudio();
         fillSharedUsersList();
 
-        usernameField.setText(fileController.getUsername());
         boolean isAlarmOn = Boolean.valueOf(fileController.getAlarmToggle());
         alarmToggle.setSelected(isAlarmOn);
         alarmOn = isAlarmOn;

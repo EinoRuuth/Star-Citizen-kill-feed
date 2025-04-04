@@ -88,18 +88,7 @@ public class GameLogParser {
             location = location.substring(0, location.lastIndexOf('_'));
             location = location.replaceAll("_", " ");
         }
-        return Arrays.asList(parts[0], parts[5], " died in ", location, " killed by ", parts[12]);
-    }
-
-    private String prettyfiKill(String line) {
-        String[] parts = line.split(" ");
-        for (int x = 0; x < parts.length; x++) {
-            parts[x] = parts[x].replaceAll("'", "");
-        }
-        String location = parts[9];
-        location = location.substring(0, location.lastIndexOf('_'));
-        location = location.replaceAll("_", " ");
-        return parts[5] + " died in " + location + " killed by " + parts[12];
+        return Arrays.asList(parts[0], cleanNpc(parts[5]), " died in ", location, " killed by ", parts[12]);
     }
 
     private List<String> listifyDestuction(String line) {
@@ -118,25 +107,30 @@ public class GameLogParser {
         return Arrays.asList(parts[0], ship, " got destroyed in ", location, " destroyed by ", cleanKiller(parts[38]), " piloted by ", parts[27], " with a ", parts[41]);
     }
 
-    private String prettyfiDestuction(String line) {
-        String[] parts = line.split(" ");
-        for (int x = 0; x < parts.length; x++) {
-            parts[x] = parts[x].replaceAll("'", "");
+    private String cleanNpc(String input){
+        if (input.contains("PU_Human_Enemy_GroundCombat")) {
+            input = input.replace("PU_Human_Enemy_GroundCombat_", "");
         }
-        String ship = parts[6];
-        ship = ship.substring(0, ship.lastIndexOf('_'));
-        ship = ship.replaceAll("_", " ");
-
-        return ship + " got destroyed in " + parts[10] + " destroyed by " + cleanKiller(parts[38]) + " piloted by " + parts[27] + " with a " + parts[41];
+        if (input.lastIndexOf('_') == -1){
+            return input;
+        } else {
+            String result = input.substring(0, input.lastIndexOf('_'));
+            result = result.replaceAll("_", " ");
+            return result.trim();
+        }
     }
 
     private String cleanKiller(String input) {
         if (input.startsWith("U")) {
             return input;
         }
-        String result = input.replaceAll("_", " ");
-        result = result.replaceAll("\\d", "");
-        return result.trim();
+        if (input.lastIndexOf('_') == -1){
+            return input;
+        } else {
+            String result = input.substring(0, input.lastIndexOf('_'));
+            result = result.replaceAll("_", " ");
+            return result.trim();
+        }
     }
 
     public List<List<String>> getPlayerKills() {
@@ -154,13 +148,6 @@ public class GameLogParser {
         return destroys;
     }
 
-    public void printPlayerKill(List<String> Desctrucions) {
-        System.out.println("\033[0;32mShip kills:\033[0m");
-        for (String kill : Desctrucions) {
-            System.out.println(kill);
-        }
-    }
-
     public void stop() {
         System.out.println("\033[0;31mExiting...\033[0m");
         stopThread = true;
@@ -170,17 +157,5 @@ public class GameLogParser {
             e.printStackTrace();
         }
         System.exit(0);
-    }
-
-    private void printExitMessage() {
-        System.out.print(" Press Enter to exit\r");
-    }
-
-    public void exitMessage() {
-        printExitMessage();
-        Scanner scanner = new Scanner(System.in);
-        scanner.nextLine();
-        stop();
-        scanner.close();
     }
 }
