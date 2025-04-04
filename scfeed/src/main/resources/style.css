@@ -11,6 +11,9 @@
 .popout-button {
     -fx-background-color: transparent;
     -fx-padding: 2;
+    -fx-font-size: 16px;
+    -fx-text-fill: #00aaff;
+    -fx-font-weight: bold;
 }
 
 .move-right {

@@ -41,10 +41,26 @@
                             AnchorPane.leftAnchor="5.0"
                             AnchorPane.rightAnchor="5.0" AnchorPane.bottomAnchor="5.0">
                             <rowConstraints>
+                                <RowConstraints percentHeight="0" vgrow="ALWAYS" />
                                 <RowConstraints percentHeight="50.0" vgrow="ALWAYS" />
+                                <RowConstraints percentHeight="0" vgrow="ALWAYS" />
                                 <RowConstraints percentHeight="50.0" vgrow="ALWAYS" />
                             </rowConstraints>
-                            <VBox fx:id="playerFeedContainer" spacing="10" GridPane.rowIndex="0">
+                            <Button fx:id="playerPopoutReturn" styleClass="popout-button"
+                                prefHeight="30" text="Return Player kills" onAction="#returnButton"
+                                GridPane.rowIndex="0">
+                                <graphic>
+                                    <StackPane>
+                                        <SVGPath fill="white"
+                                            content="M12 4h2.586L9.293 9.293l1.414 1.414L16 5.414V8h2V2h-6v2z"
+                                            scaleX="-1" scaleY="-1"
+                                            translateX="2" translateY="-2" />
+                                        <SVGPath fill="white"
+                                            content="M4 4h6v2H4v10h10v-6h2v6a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z" />
+                                    </StackPane>
+                                </graphic>
+                            </Button>
+                            <VBox fx:id="playerFeedContainer" spacing="10" GridPane.rowIndex="1">
                                 <HBox>
                                     <Label text="Player kills" alignment="CENTER"
                                         textAlignment="CENTER"
@@ -72,7 +88,21 @@
                                     </content>
                                 </ScrollPane>
                             </VBox>
-                            <VBox fx:id="shipFeedContainer" spacing="10" GridPane.rowIndex="1">
+                            <Button fx:id="shipPopoutReturn" styleClass="popout-button"
+                                prefHeight="30" text="Return Ship kills" onAction="#returnButton"
+                                GridPane.rowIndex="2">
+                                <graphic>
+                                    <StackPane>
+                                        <SVGPath fill="white"
+                                            content="M12 4h2.586L9.293 9.293l1.414 1.414L16 5.414V8h2V2h-6v2z"
+                                            scaleX="-1" scaleY="-1"
+                                            translateX="2" translateY="-2" />
+                                        <SVGPath fill="white"
+                                            content="M4 4h6v2H4v10h10v-6h2v6a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z" />
+                                    </StackPane>
+                                </graphic>
+                            </Button>
+                            <VBox fx:id="shipFeedContainer" spacing="10" GridPane.rowIndex="3">
                                 <HBox>
                                     <Label text="Ship kills" alignment="CENTER"
                                         textAlignment="CENTER"

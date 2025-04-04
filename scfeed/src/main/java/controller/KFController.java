@@ -41,7 +41,7 @@ public class KFController {
     @FXML private GridPane mainGrid;
     @FXML private VBox PlayerKills, ShipKills, partyList, playerFeedContainer, shipFeedContainer;
     @FXML private ScrollPane shipKillContainer, playerKillContainer;
-    @FXML private Button fileButton;
+    @FXML private Button fileButton, playerPopoutReturn, shipPopoutReturn;
     @FXML private TabPane MainTabPane;
     @FXML private Slider volumeSlider;
     @FXML private TextField usernameField, addToPartyField;
@@ -49,6 +49,7 @@ public class KFController {
     @FXML private Label volumeLabel, audioFileErrorMsg, savedUsernameLabel, audioFileLocations, fileErrorMsg, fileLocations, addedToPartyLabel;
     private List<String> partyMembers = new ArrayList<String>();
     private Boolean alarmOn;
+    private Boolean poppedOut = false;
     private Stage poputstage = new Stage();
     private File audioFile;
     private MediaPlayer player;
@@ -275,24 +276,41 @@ public class KFController {
 
     public void hidePlayerKillsList(){
         System.out.println("this will hide the player kills list and make window 0/100");
-        mainGrid.getRowConstraints().get(0).setPercentHeight(0);
-        mainGrid.getRowConstraints().get(1).setPercentHeight(100);
+        mainGrid.getRowConstraints().get(0).setPercentHeight(10);
+        mainGrid.getRowConstraints().get(1).setPercentHeight(0);
+        mainGrid.getRowConstraints().get(2).setPercentHeight(0);
+        mainGrid.getRowConstraints().get(3).setPercentHeight(90);
+        playerPopoutReturn.setVisible(true);
         playerFeedContainer.setVisible(false);
     }
 
     public void hideShipKillsList(){
         System.out.println("this will hide the ship kills list and make window 100/0");
-        mainGrid.getRowConstraints().get(0).setPercentHeight(100);
-        mainGrid.getRowConstraints().get(1).setPercentHeight(0);
+        mainGrid.getRowConstraints().get(0).setPercentHeight(0);
+        mainGrid.getRowConstraints().get(1).setPercentHeight(90);
+        mainGrid.getRowConstraints().get(2).setPercentHeight(10);
+        mainGrid.getRowConstraints().get(3).setPercentHeight(0);
+        shipPopoutReturn.setVisible(true);
         shipFeedContainer.setVisible(false);
+    }
+
+    @FXML
+    private void returnButton(){
+        poputstage.close();
+        resetLists();
     }
 
     public void resetLists(){
         System.out.println("this would make both lists visible and make window 50/50");
-        mainGrid.getRowConstraints().get(0).setPercentHeight(50);
+        mainGrid.getRowConstraints().get(0).setPercentHeight(0);
         mainGrid.getRowConstraints().get(1).setPercentHeight(50);
+        mainGrid.getRowConstraints().get(2).setPercentHeight(0);
+        mainGrid.getRowConstraints().get(3).setPercentHeight(50);
+        playerPopoutReturn.setVisible(false);
+        shipPopoutReturn.setVisible(false);
         playerFeedContainer.setVisible(true);
         shipFeedContainer.setVisible(true);
+        poppedOut = false;
     }
 
     private void openPopup(Boolean player){
@@ -313,6 +331,7 @@ public class KFController {
             poputstage.setScene(scene);
             poputstage.getIcons().add(new Image(GUI.class.getResourceAsStream("/logo.png")));
             poputstage.show();
+            poppedOut = true;
         } catch (Exception e) {
             System.err.println("Error loading FXML file: " + e.getMessage());
             e.printStackTrace();
@@ -322,13 +341,17 @@ public class KFController {
     @FXML
     private void popoutPlayerKillsWindow(){
         System.out.println("popped out player kills");
-        openPopup(true);
+        if (!poppedOut){
+            openPopup(true);
+        }
     }
 
     @FXML
     private void popoutShipKillsWindow(){
         System.out.println("popped out ship kills");
-        openPopup(false);
+        if (!poppedOut){
+            openPopup(false);
+        }
     }
 
     public void start() {
@@ -342,6 +365,8 @@ public class KFController {
         savedUsernameLabel.setVisible(false);
         fileErrorMsg.setVisible(false);
         addedToPartyLabel.setVisible(false);
+        playerPopoutReturn.setVisible(false);
+        shipPopoutReturn.setVisible(false);
 
         MainTabPane.setTabMaxWidth(40);
         MainTabPane.setTabMinWidth(40);
