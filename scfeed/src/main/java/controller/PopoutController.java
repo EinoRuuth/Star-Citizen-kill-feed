@@ -13,9 +13,6 @@ public class PopoutController {
     public void setParentController(KFController thisParent){
         parent = thisParent;
     }
-    public void close(){
-        parent.resetLists();
-    }
 
     public void startPlayerPopup(){
         popoutTitle.setText("Player kills");

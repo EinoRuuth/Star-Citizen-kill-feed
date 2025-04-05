@@ -48,12 +48,12 @@ public class GameLogParser {
             while (!stopThread) {
                 String line = fileReader.readLine();
                 if (line != null) {
-                    if (line.contains("kill")) {
+                    if (line.contains("CActor::Kill:")) {
                         System.out.println("New kill");
                         List<String> listified = listifyKill(line);
                         kills.add(listified);
                         Platform.runLater(() -> this.gui.addKill(listified));
-                    } else if (line.contains("Destruction")) {
+                    } else if (line.contains("CVehicle::OnAdvanceDestroyLevel:")) {
                         System.out.println("New destruction");
                         List<String> listified = listifyDestuction(line);
                         destroys.add(listified);
@@ -70,9 +70,9 @@ public class GameLogParser {
 
     private void getKillsAndDestroys(List<String> gameLogData) {
         for (String line : gameLogData) {
-            if (line.contains("kill")) {
+            if (line.contains("CActor::Kill:")) {
                 kills.add(listifyKill(line));
-            } else if (line.contains("Destruction")) {
+            } else if (line.contains("CVehicle::OnAdvanceDestroyLevel:")) {
                 destroys.add(listifyDestuction(line));
             }
         }

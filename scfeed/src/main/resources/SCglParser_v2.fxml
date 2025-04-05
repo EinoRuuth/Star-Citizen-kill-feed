@@ -47,7 +47,8 @@
                                 <RowConstraints percentHeight="50.0" vgrow="ALWAYS" />
                             </rowConstraints>
                             <Button fx:id="playerPopoutReturn" styleClass="popout-button"
-                                prefHeight="30" text="Return Player kills" onAction="#returnButton"
+                                prefHeight="30" text="Return Player kills"
+                                onAction="#returnKillButton"
                                 GridPane.rowIndex="0">
                                 <graphic>
                                     <StackPane>
@@ -95,7 +96,8 @@
                                 </ScrollPane>
                             </VBox>
                             <Button fx:id="shipPopoutReturn" styleClass="popout-button"
-                                prefHeight="30" text="Return Ship kills" onAction="#returnButton"
+                                prefHeight="30" text="Return Ship kills"
+                                onAction="#returnShipButton"
                                 GridPane.rowIndex="2">
                                 <graphic>
                                     <StackPane>

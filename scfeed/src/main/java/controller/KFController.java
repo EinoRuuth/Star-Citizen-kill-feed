@@ -50,8 +50,10 @@ public class KFController {
     private List<String> partyMembers = new ArrayList<String>();
     private String username;
     private Boolean alarmOn;
-    private Boolean poppedOut = false;
+    private Boolean killPoppedOut = false;
+    private Boolean shipPoppedOut = false;
     private Stage poputstage = new Stage();
+    private Stage poputstage2 = new Stage();
     private File audioFile;
     private MediaPlayer player;
     private GUI gui;
@@ -298,60 +300,132 @@ public class KFController {
     }
 
     public void hidePlayerKillsList(){
-        mainGrid.getRowConstraints().get(0).setPercentHeight(10);
-        mainGrid.getRowConstraints().get(1).setPercentHeight(0);
-        mainGrid.getRowConstraints().get(2).setPercentHeight(0);
-        mainGrid.getRowConstraints().get(3).setPercentHeight(90);
-        playerPopoutReturn.setVisible(true);
-        playerFeedContainer.setVisible(false);
+        switch(killPoppedOut + " " + shipPoppedOut){
+            case "true false":
+                System.out.println(killPoppedOut+" "+shipPoppedOut);
+                mainGrid.getRowConstraints().get(0).setPercentHeight(10);
+                mainGrid.getRowConstraints().get(1).setPercentHeight(0);
+                mainGrid.getRowConstraints().get(2).setPercentHeight(0);
+                mainGrid.getRowConstraints().get(3).setPercentHeight(90);
+                playerPopoutReturn.setVisible(true);
+                playerFeedContainer.setVisible(false);
+                break;
+            default: // "true true"
+                System.out.println(killPoppedOut+" "+shipPoppedOut);
+                mainGrid.getRowConstraints().get(0).setPercentHeight(50);
+                mainGrid.getRowConstraints().get(1).setPercentHeight(0);
+                mainGrid.getRowConstraints().get(2).setPercentHeight(50);
+                mainGrid.getRowConstraints().get(3).setPercentHeight(0);
+                shipPopoutReturn.setVisible(true);
+                shipFeedContainer.setVisible(false);
+                playerPopoutReturn.setVisible(true);
+                playerFeedContainer.setVisible(false);
+                break;
+        }
     }
 
     public void hideShipKillsList(){
-        mainGrid.getRowConstraints().get(0).setPercentHeight(0);
-        mainGrid.getRowConstraints().get(1).setPercentHeight(90);
-        mainGrid.getRowConstraints().get(2).setPercentHeight(10);
-        mainGrid.getRowConstraints().get(3).setPercentHeight(0);
-        shipPopoutReturn.setVisible(true);
-        shipFeedContainer.setVisible(false);
+        switch(killPoppedOut + " " + shipPoppedOut){
+            case "false true":
+                System.out.println(killPoppedOut+" "+shipPoppedOut);
+                mainGrid.getRowConstraints().get(0).setPercentHeight(0);
+                mainGrid.getRowConstraints().get(1).setPercentHeight(90);
+                mainGrid.getRowConstraints().get(2).setPercentHeight(10);
+                mainGrid.getRowConstraints().get(3).setPercentHeight(0);
+                shipPopoutReturn.setVisible(true);
+                shipFeedContainer.setVisible(false);
+                break;
+            default: // "true true"
+                System.out.println(killPoppedOut+" "+shipPoppedOut);
+                mainGrid.getRowConstraints().get(0).setPercentHeight(50);
+                mainGrid.getRowConstraints().get(1).setPercentHeight(0);
+                mainGrid.getRowConstraints().get(2).setPercentHeight(50);
+                mainGrid.getRowConstraints().get(3).setPercentHeight(0);
+                shipPopoutReturn.setVisible(true);
+                shipFeedContainer.setVisible(false);
+                playerPopoutReturn.setVisible(true);
+                playerFeedContainer.setVisible(false);
+                break;
+        }
     }
 
     @FXML
-    private void returnButton(){
+    private void returnKillButton(){
         poputstage.close();
+        killPoppedOut = false;
+        resetLists();
+    }
+
+    @FXML
+    private void returnShipButton(){
+        poputstage2.close();
+        shipPoppedOut = false;
         resetLists();
     }
 
     public void resetLists(){
-        mainGrid.getRowConstraints().get(0).setPercentHeight(0);
-        mainGrid.getRowConstraints().get(1).setPercentHeight(50);
-        mainGrid.getRowConstraints().get(2).setPercentHeight(0);
-        mainGrid.getRowConstraints().get(3).setPercentHeight(50);
-        playerPopoutReturn.setVisible(false);
-        shipPopoutReturn.setVisible(false);
-        playerFeedContainer.setVisible(true);
-        shipFeedContainer.setVisible(true);
-        poppedOut = false;
+        switch(killPoppedOut + " " + shipPoppedOut){
+            case "false false":
+                System.out.println("false false");
+                mainGrid.getRowConstraints().get(0).setPercentHeight(0);
+                mainGrid.getRowConstraints().get(1).setPercentHeight(50);
+                mainGrid.getRowConstraints().get(2).setPercentHeight(0);
+                mainGrid.getRowConstraints().get(3).setPercentHeight(50);
+                playerPopoutReturn.setVisible(false);
+                shipPopoutReturn.setVisible(false);
+                playerFeedContainer.setVisible(true);
+                shipFeedContainer.setVisible(true);
+                break;
+            case "false true":
+                System.out.println("false true");
+                mainGrid.getRowConstraints().get(0).setPercentHeight(0);
+                mainGrid.getRowConstraints().get(1).setPercentHeight(90);
+                mainGrid.getRowConstraints().get(2).setPercentHeight(10);
+                mainGrid.getRowConstraints().get(3).setPercentHeight(0);
+                playerPopoutReturn.setVisible(false);
+                playerFeedContainer.setVisible(true);
+                shipPopoutReturn.setVisible(true);
+                shipFeedContainer.setVisible(false);
+                break;
+            case "true false":
+                System.out.println("true false");
+                mainGrid.getRowConstraints().get(0).setPercentHeight(10);
+                mainGrid.getRowConstraints().get(1).setPercentHeight(0);
+                mainGrid.getRowConstraints().get(2).setPercentHeight(0);
+                mainGrid.getRowConstraints().get(3).setPercentHeight(90);
+                shipPopoutReturn.setVisible(false);
+                shipFeedContainer.setVisible(true);
+                playerPopoutReturn.setVisible(true);
+                playerFeedContainer.setVisible(false);
+                break;
+        }
     }
 
-    private void openPopup(Boolean player){
+    private void openPopup(Boolean player, Stage thiStage){
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/poppedOutList.fxml"));
         PopoutController controller;
         try {
             Scene scene = new Scene(loader.load(), 600, 300);
             controller = loader.getController();
             controller.setParentController(this);
-            poputstage.setOnHidden(e -> controller.close());
             if (player) {
+                thiStage.setOnHidden(e -> {
+                    killPoppedOut = false;
+                    resetLists();
+                });
                 controller.startPlayerPopup();
-                poputstage.setTitle("Player kills");
+                thiStage.setTitle("Player kills");
             } else {
+                thiStage.setOnHidden(e -> {
+                    shipPoppedOut = false;
+                    resetLists();
+                });
                 controller.startShipPopup();
-                poputstage.setTitle("Ship kills");
+                thiStage.setTitle("Ship kills");
             }
-            poputstage.setScene(scene);
-            poputstage.getIcons().add(new Image(GUI.class.getResourceAsStream("/logo.png")));
-            poputstage.show();
-            poppedOut = true;
+            thiStage.setScene(scene);
+            thiStage.getIcons().add(new Image(GUI.class.getResourceAsStream("/logo.png")));
+            thiStage.show();
         } catch (Exception e) {
             System.err.println("Error loading FXML file: " + e.getMessage());
             e.printStackTrace();
@@ -361,17 +435,15 @@ public class KFController {
     @FXML
     private void popoutPlayerKillsWindow(){
         System.out.println("popped out player kills");
-        if (!poppedOut){
-            openPopup(true);
-        }
+        killPoppedOut = true;
+        openPopup(true, poputstage);
     }
 
     @FXML
     private void popoutShipKillsWindow(){
         System.out.println("popped out ship kills");
-        if (!poppedOut){
-            openPopup(false);
-        }
+        shipPoppedOut = true;
+        openPopup(false, poputstage2);
     }
 
     public void start() {
@@ -413,6 +485,7 @@ public class KFController {
 
     public void shutdown() {
         poputstage.close();
+        poputstage2.close();
         gameLogParser.stop();
     }
 }
