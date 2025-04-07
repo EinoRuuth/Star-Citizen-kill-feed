@@ -87,11 +87,11 @@
                                         styleClass="list-checkbox" />
                                 </HBox>
                                 <ScrollPane fitToWidth="true" styleClass="kill-list"
-                                    GridPane.rowIndex="1" fx:id="playerKillContainer">
+                                    fx:id="playerKillContainer">
                                     <content>
                                         <VBox fx:id="PlayerKills" styleClass="kill-list"
                                             minHeight="32.0"
-                                            maxHeight="Infinity" VBox.vgrow="ALWAYS" />
+                                            VBox.vgrow="ALWAYS" />
                                     </content>
                                 </ScrollPane>
                             </VBox>
@@ -130,11 +130,11 @@
                                     </Button>
                                 </HBox>
                                 <ScrollPane fitToWidth="true" styleClass="kill-list"
-                                    GridPane.rowIndex="3" fx:id="shipKillContainer">
+                                    fx:id="shipKillContainer">
                                     <content>
                                         <VBox fx:id="ShipKills" styleClass="kill-list"
                                             minHeight="32.0"
-                                            maxHeight="Infinity" VBox.vgrow="ALWAYS" />
+                                            VBox.vgrow="ALWAYS" />
                                     </content>
                                 </ScrollPane>
                             </VBox>
