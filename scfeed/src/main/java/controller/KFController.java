@@ -66,11 +66,11 @@ public class KFController {
         if (!kill.contains(username) && !partyMembers.stream().anyMatch(kill::contains)) {
             playSound();
         }
-        PlayerKills.getChildren().add(0, createTextFlowWithBoldText(kill));
+        PlayerKills.getChildren().add(0, createTextFlowWithBoldTextForKill(kill));
     }
 
     public void addDestruction(List<String> destruction){
-        ShipKills.getChildren().add(0, createTextFlowWithBoldText(destruction));
+        ShipKills.getChildren().add(0, createTextFlowWithBoldTextForDesctruction(destruction));
     }
 
     public void setGUI(GUI gui){
@@ -97,18 +97,18 @@ public class KFController {
                     continue;
                 }
             }
-            PlayerKills.getChildren().add(0, createTextFlowWithBoldText(kill));
+            PlayerKills.getChildren().add(0, createTextFlowWithBoldTextForKill(kill));
         }
 
         ShipKills.getChildren().clear();
         gameLogParser.getShipKills().forEach(destruction -> {
-            ShipKills.getChildren().add(0, createTextFlowWithBoldText(destruction));
+            ShipKills.getChildren().add(0, createTextFlowWithBoldTextForDesctruction(destruction));
         });
 
         System.out.println("list view filled");
     }
 
-    public TextFlow createTextFlowWithBoldText(List<String> input) {
+    public TextFlow createTextFlowWithBoldTextForKill(List<String> input) {
         TextFlow textFlow = new TextFlow();
         if (!input.contains(username) && !partyMembers.stream().anyMatch(input::contains)) {
             textFlow.setStyle("-fx-background-color: #373737;");
@@ -128,6 +128,53 @@ public class KFController {
                     System.err.println("Invalid DateTime format: " + s);
                 }
             } else if (loopTime % 2 != 0) {
+                Text text = new Text(s);
+                text.setStyle("-fx-font-weight: Bold; -fx-fill: white;");
+                textFlow.getChildren().add(text);
+            } else {
+                Text text = new Text(s);
+                text.setStyle("-fx-font-weight: regular; -fx-fill: lightgrey;");
+                textFlow.getChildren().add(text);
+            }
+            loopTime++;
+        }
+        return textFlow;
+    }
+
+    public TextFlow createTextFlowWithBoldTextForDesctruction(List<String> input) {
+        TextFlow textFlow = new TextFlow();
+        if (!input.contains(username) && !partyMembers.stream().anyMatch(input::contains)) {
+            textFlow.setStyle("-fx-background-color: #373737;");
+        }
+        int loopTime = 0;
+
+        for (String s : input) {
+            if (loopTime == 0) {
+                try {
+                    String sanitizedInput = s.replaceAll("[<>]", "");
+                    LocalDateTime dateTime = LocalDateTime.parse(sanitizedInput, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSX"));
+                    String formattedDate = dateTime.format(DateTimeFormatter.ofPattern("(dd.MM) HH.mm.ss"));
+                    Text text = new Text(formattedDate+": ");
+                    text.setStyle("-fx-font-weight: Bold; -fx-fill: #00aaff;");
+                    textFlow.getChildren().add(text);
+                } catch (DateTimeParseException e) {
+                    System.err.println("Invalid DateTime format: " + s);
+                }
+            } else if (loopTime == 1) {
+                if (s == "1"){
+                    Text text = new Text("Soft Death: ");
+                    text.setStyle("-fx-font-weight: Bold; -fx-fill: pink;");
+                    textFlow.getChildren().add(text);
+                } else if (s == "2") {
+                    Text text = new Text("Full Death: ");
+                    text.setStyle("-fx-font-weight: Bold; -fx-fill: red;");
+                    textFlow.getChildren().add(text);
+                } else {
+                    Text text = new Text("Unkown State: ");
+                    text.setStyle("-fx-font-weight: Bold; -fx-fill: grey;");
+                    textFlow.getChildren().add(text);
+                }
+            } else if (loopTime % 2 == 0) {
                 Text text = new Text(s);
                 text.setStyle("-fx-font-weight: Bold; -fx-fill: white;");
                 textFlow.getChildren().add(text);

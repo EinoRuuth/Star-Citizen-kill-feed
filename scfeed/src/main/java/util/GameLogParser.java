@@ -104,7 +104,14 @@ public class GameLogParser {
             location = location.substring(0, location.lastIndexOf('_'));
             location = location.replaceAll("_", " ");
         }
-        return Arrays.asList(parts[0], ship, " got destroyed in ", location, " destroyed by ", cleanKiller(parts[38]), " piloted by ", parts[27], " with a ", parts[41]);
+        System.out.println(parts[35]);
+        if (parts[35].equals("1")) {
+            return Arrays.asList(parts[0], "1", ship, " got destroyed in ", location, " destroyed by ", cleanKiller(parts[38]), " piloted by ", parts[27], " with a ", parts[41]);
+        } else if (parts[35].equals("2")) {
+            return Arrays.asList(parts[0], "2", ship, " got destroyed in ", location, " destroyed by ", cleanKiller(parts[38]), " piloted by ", parts[27], " with a ", parts[41]);
+        } else {
+            return Arrays.asList(parts[0], "3", ship, " got destroyed in ", location, " destroyed by ", cleanKiller(parts[38]), " piloted by ", parts[27], " with a ", parts[41]);
+        }
     }
 
     private String cleanNpc(String input){

@@ -17,7 +17,7 @@ public class PopoutController {
     public void startPlayerPopup(){
         popoutTitle.setText("Player kills");
         parent.gameLogParser.getPlayerKills().forEach(kill -> {
-            killsList.getChildren().add(0, parent.createTextFlowWithBoldText(kill));
+            killsList.getChildren().add(0, parent.createTextFlowWithBoldTextForKill(kill));
         });
         parent.hidePlayerKillsList();
     }
@@ -25,7 +25,7 @@ public class PopoutController {
     public void startShipPopup(){
         popoutTitle.setText("Ship kills");
         parent.gameLogParser.getShipKills().forEach(destruction -> {
-            killsList.getChildren().add(0, parent.createTextFlowWithBoldText(destruction));
+            killsList.getChildren().add(0, parent.createTextFlowWithBoldTextForDesctruction(destruction));
         });
         parent.hideShipKillsList();
     }
