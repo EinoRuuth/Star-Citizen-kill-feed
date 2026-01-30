@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+
+<VBox spacing="10"
+    maxHeight="-Infinity"
+    maxWidth="-Infinity"
+    minHeight="-Infinity"
+    minWidth="-Infinity"
+    prefHeight="Infinity"
+    prefWidth="Infinity"
+    xmlns:fx="http://javafx.com/fxml/1"
+    xmlns="http://javafx.com/javafx/23.0.1"
+    fx:controller="controller.PopoutController"
+    stylesheets="@style.css">
+    <HBox>
+        <Label text="Player kills" alignment="CENTER" textAlignment="CENTER"
+            styleClass="section-title" mouseTransparent="true" fx:id="popoutTitle" />
+    </HBox>
+    <ScrollPane fitToWidth="true" styleClass="kill-list">
+        <content>
+            <VBox fx:id="killsList" styleClass="kill-list" minHeight="32.0"
+                maxHeight="Infinity" VBox.vgrow="ALWAYS" />
+        </content>
+    </ScrollPane>
+</VBox>
